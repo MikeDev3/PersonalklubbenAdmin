@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using PersonalklubbenHVAdmin.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 
@@ -14,6 +17,30 @@ namespace Loinprojekt_admin.Controllers
 
             //ViewBag.Username = "Inloggad som: " + sessionObjekt.username;
             return View();
+        }
+
+
+        public async void ShowMembers ()
+        {
+            try
+            {
+                string URLairport = @"http://193.10.202.76/PhersonalklubbenREST/api/Medlemmars";
+                HttpClient httpClient = new HttpClient();
+                HttpResponseMessage response2 = await httpClient.GetAsync(new Uri(URLairport));
+
+                if (response2.IsSuccessStatusCode)
+                {
+                    var content2 = await response2.Content.ReadAsStringAsync();
+                    var membersListFromAPI = JsonConvert.DeserializeObject<List<Medlem>>(content2);
+
+                    //Databind the list
+                }
+            }
+            catch (Exception ex)
+            {
+                //ToDo Give errormessage to user and possibly log error
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
         }
         //funkar
         public ActionResult ShowProfile(int id)
@@ -330,5 +357,258 @@ namespace Loinprojekt_admin.Controllers
         {
             return View();
         }
+
+
+        //public BookAFlight()
+        //{
+        //    this.InitializeComponent();
+        //    ReadFlights();
+        //}
+        //protected async override void OnNavigatedTo(NavigationEventArgs e)
+        //{
+        //    if (e.Parameter != null)
+        //    {
+        //        try
+        //        {
+        //            string URL = @"http://localhost:61607/Travelers/" + e.Parameter;
+        //            HttpClient httpClient = new HttpClient();
+        //            HttpResponseMessage response = await httpClient.GetAsync(new Uri(URL));
+
+        //            if (response.IsSuccessStatusCode)
+        //            {
+        //                var content = await response.Content.ReadAsStringAsync();
+        //                var travelerObjectFromAPI = JsonConvert.DeserializeObject<Travelers>(content);
+        //                id = travelerObjectFromAPI.ID;
+        //                loggedInTraveler = travelerObjectFromAPI;
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            //ToDo Give errormessage to user and possibly log error
+        //            System.Diagnostics.Debug.WriteLine(ex.ToString());
+        //        }
+
+        //    }
+        //}
+        //public async void ReadFlights()
+        //{
+        //    var flightListFromAPI = new List<Flights>();
+        //    var airportListFromAPI = new List<Airport>();
+
+        //    try
+        //    {
+
+        //        string URL = @"http://localhost:61607/flights";
+        //        HttpClient httpClient = new HttpClient();
+        //        HttpResponseMessage response = await httpClient.GetAsync(new Uri(URL));
+
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            var content = await response.Content.ReadAsStringAsync();
+        //            flightListFromAPI = JsonConvert.DeserializeObject<List<Flights>>(content);
+
+        //            //Databind the list
+        //            //flightList.ItemsSource = flightListFromAPI;
+        //        }
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        //ToDo Give errormessage to user and possibly log error
+        //        System.Diagnostics.Debug.WriteLine(ex.ToString());
+        //    }
+        //    try
+        //    {
+        //        string URLairport = @"http://localhost:61607/Airports";
+        //        HttpClient httpClient = new HttpClient();
+        //        HttpResponseMessage response2 = await httpClient.GetAsync(new Uri(URLairport));
+
+        //        if (response2.IsSuccessStatusCode)
+        //        {
+        //            var content2 = await response2.Content.ReadAsStringAsync();
+        //            airportListFromAPI = JsonConvert.DeserializeObject<List<Airport>>(content2);
+
+        //            //Databind the list
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        //ToDo Give errormessage to user and possibly log error
+        //        System.Diagnostics.Debug.WriteLine(ex.ToString());
+        //    }
+
+        //    List<Models.ViewModels.FlightAndAirportsModel> presentationList = new List<Models.ViewModels.FlightAndAirportsModel>();
+
+
+        //    foreach (var item in flightListFromAPI)
+        //    {
+        //        Airport fromAirport = airportListFromAPI.Where(x => x.ID == item.FromAirport).FirstOrDefault();
+        //        Airport toAirport = airportListFromAPI.Where(x => x.ID == item.ToAirport).FirstOrDefault();
+
+        //        Models.ViewModels.FlightAndAirportsModel presentationObject = new Models.ViewModels.FlightAndAirportsModel
+        //        {
+        //            FlightID = item.ID,
+        //            Price = item.Price,
+        //            DateFrom = item.DateFrom,
+        //            DateTo = item.DateTo,
+        //            FromAirportName = fromAirport.AirportName + " - " + fromAirport.Country,
+        //            ToAirportName = toAirport.AirportName + " - " + toAirport.Country,
+        //            FromAirport = fromAirport.ID,
+        //            ToAirport = toAirport.ID
+
+        //        };
+
+        //        presentationList.Add(presentationObject);
+        //    }
+        //    flightList.ItemsSource = presentationList;
+        //    // flightList.SelectedIndex = -1;
+        //}
+
+        //public async System.Threading.Tasks.Task AddFlightAsync()
+        //{
+        //    try
+        //    {
+        //        HttpClient client = new HttpClient();
+
+        //        //We need to convert back from ViewModel AuthorPresentation to Author
+        //        Models.ViewModels.FlightAndAirportsModel selectedFlight = (Models.ViewModels.FlightAndAirportsModel)flightList.SelectedItem; //Hämta det valda objektet
+
+        //        Models.ViewModels.FlightAndAirportsModel selectedObject = flightList.SelectedItem as Models.ViewModels.FlightAndAirportsModel;
+
+
+        //        var flightThatIsChosen = new Flights();
+        //        try
+        //        {
+        //            string URL = @"http://localhost:61607/flights/" + selectedFlight.FlightID;
+        //            HttpClient httpClient = new HttpClient();
+        //            HttpResponseMessage response = await httpClient.GetAsync(new Uri(URL));
+
+        //            if (response.IsSuccessStatusCode)
+        //            {
+        //                var content = await response.Content.ReadAsStringAsync();
+        //                flightThatIsChosen = JsonConvert.DeserializeObject<Flights>(content);
+
+        //            }
+
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            //ToDo Give errormessage to user and possibly log error
+        //            System.Diagnostics.Debug.WriteLine(ex.ToString());
+        //        }
+        //        loggedInTraveler.Flights.Add(flightThatIsChosen);
+        //        flightThatIsChosen.Travelers.Add(loggedInTraveler);
+
+
+        //        try
+        //        {
+        //            string URL = @"http://localhost:61607/";
+        //            HttpClient httpClient = new HttpClient();
+
+        //            var myContent = JsonConvert.SerializeObject(flightThatIsChosen);
+        //            var buffer = Encoding.UTF8.GetBytes(myContent);
+        //            var byteContent = new ByteArrayContent(buffer);
+        //            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+        //            var result = client.PostAsync(URL + "FlightBookings", byteContent).Result;
+
+        //            if (result.IsSuccessStatusCode)
+        //            {
+        //                //GO to next page
+        //                this.Frame.Navigate(typeof(LoggedInMainMenu), id);
+
+        //            }
+
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            System.Diagnostics.Debug.WriteLine(ex.ToString());
+        //        }
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        //ToDo Give errormessage to user and possibly log error
+        //        System.Diagnostics.Debug.WriteLine(ex.ToString());
+        //    }
+        //}
+
+        //public async System.Threading.Tasks.Task PostFlightAsync(Flights newBooking)
+        //{
+        //    using (HttpClient client = new HttpClient())
+        //    {
+        //        try
+        //        {
+        //            client.BaseAddress = new Uri("http://localhost:61607");
+        //            MediaTypeWithQualityHeaderValue content = new MediaTypeWithQualityHeaderValue("application/json");
+        //            client.DefaultRequestHeaders.Accept.Add(content);
+        //            // HTTP POST
+        //            var message = new HttpRequestMessage(HttpMethod.Post, "FlightBookings/" + id + "/" + newBooking.ID);
+        //            var result = await client.SendAsync(message);
+
+        //            string resultContent = await result.Content.ReadAsStringAsync();
+
+
+        //            if (result.IsSuccessStatusCode)
+        //            {
+        //                this.Frame.Navigate(typeof(LoggedInMainMenu), id);
+        //                var dialog = new MessageDialog("Your flight has been booked");
+        //                await dialog.ShowAsync();
+        //            }
+        //            else
+        //            {
+        //                var dialog = new MessageDialog(resultContent);
+        //                await dialog.ShowAsync();
+        //                this.Frame.Navigate(typeof(LoggedInMainMenu), id);
+
+        //            }
+
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            System.Diagnostics.Debug.WriteLine(ex.ToString());
+        //        }
+        //    }
+        //}
+
+        //private void GoToMainMenu(object sender, RoutedEventArgs e)
+        //{
+        //    this.Frame.Navigate(typeof(LoggedInMainMenu), id);
+
+        //}
+
+        //private async void FlightList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    HttpClient client = new HttpClient();
+
+        //    //We need to convert back from ViewModel AuthorPresentation to Author
+        //    Models.ViewModels.FlightAndAirportsModel selectedFlight = (Models.ViewModels.FlightAndAirportsModel)flightList.SelectedItem; //Hämta det valda objektet
+        //    var flightThatIsChosen = new Flights();
+
+        //    try
+        //    {
+        //        string URL = @"http://localhost:61607/flights/" + selectedFlight.FlightID;
+        //        HttpClient httpClient = new HttpClient();
+        //        HttpResponseMessage response = await httpClient.GetAsync(new Uri(URL));
+
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            var content = await response.Content.ReadAsStringAsync();
+        //            flightThatIsChosen = JsonConvert.DeserializeObject<Flights>(content);
+
+        //        }
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        //ToDo Give errormessage to user and possibly log error
+        //        System.Diagnostics.Debug.WriteLine(ex.ToString());
+        //    }
+        //    // loggedInTraveler.Flights.Add(flightThatIsChosen);
+        //    flightThatIsChosen.Travelers.Add(loggedInTraveler);
+
+        //    await PostFlightAsync(flightThatIsChosen);
+        //}
+
+
     }
 }
