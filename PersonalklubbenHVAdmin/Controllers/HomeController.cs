@@ -16,6 +16,7 @@ namespace Loinprojekt_admin.Controllers
             //Models.AdminModel sessionObjekt = (Models.AdminModel)Session["admin"];
 
             //ViewBag.Username = "Inloggad som: " + sessionObjekt.username;
+            //ShowMembers();
             return View();
         }
 

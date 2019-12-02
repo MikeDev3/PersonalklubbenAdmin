@@ -26,4 +26,3 @@ namespace PersonalklubbenHVAdmin.Models
         public DateTime PubliceringsDatum { get; set; }
     }
 }
-}
