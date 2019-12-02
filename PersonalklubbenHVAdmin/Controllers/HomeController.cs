@@ -61,7 +61,7 @@ namespace Loinprojekt_admin.Controllers
             //            {
             //                return View("Error", new HandleErrorInfo(ex, "Home", "ActiveUsers"));
             //            }
-            //>>>>>>> Sessions klara, man måste starta från vyn "LoginPage" och logga in med kontot Admin/Admin
+            //>>>>>>> Sessions klaraa, man måste starta från vyn "LoginPage" och logga in med kontot Admin/Admin
             return View();
 
         }
