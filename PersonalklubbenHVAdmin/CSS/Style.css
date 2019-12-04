@@ -21,6 +21,33 @@
     top: 20%;
 }
 
+.topnav .search-container {
+    float: right;
+}
+
+.topnav input[type=text] {
+    padding: 6px;
+    margin-top: 8px;
+    font-size: 17px;
+    border: none;
+}
+
+.topnav .search-container button {
+    float: right;
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+
+    .topnav .search-container button:hover {
+        background: #ccc;
+    }
+
+
 .bakgrundsbildlogin {
     background-image: url(https://scontent-arn2-1.xx.fbcdn.net/v/t1.15752-9/54236757_1329312470558574_7049580571705475072_n.png?_nc_cat=100&_nc_ht=scontent-arn2-1.xx&oh=af84e9d84b646db85d4df1ffbf21ee5e&oe=5D1A6321);
     width: 100%;

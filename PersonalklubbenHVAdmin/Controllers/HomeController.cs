@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Mvc;
 
@@ -17,32 +18,54 @@ namespace Loinprojekt_admin.Controllers
 
             //ViewBag.Username = "Inloggad som: " + sessionObjekt.username;
             //ShowMembers();
-            return View();
-        }
 
+            int activeRow = 0;
+            int newRegistrations = 0;
+            int totalMembers = 0;
 
-        public async void ShowMembers ()
-        {
+            StaticsticModel statistics = new StaticsticModel();
+
             try
             {
-                string URLairport = @"http://193.10.202.76/PhersonalklubbenREST/api/Medlemmars";
-                HttpClient httpClient = new HttpClient();
-                HttpResponseMessage response2 = await httpClient.GetAsync(new Uri(URLairport));
-
-                if (response2.IsSuccessStatusCode)
+                using (HttpClient client = new HttpClient())
                 {
-                    var content2 = await response2.Content.ReadAsStringAsync();
-                    var membersListFromAPI = JsonConvert.DeserializeObject<List<Medlem>>(content2);
+                    client.BaseAddress = new Uri("http://193.10.202.76/");
+                    MediaTypeWithQualityHeaderValue contentType = new MediaTypeWithQualityHeaderValue("application/json");
+                    client.DefaultRequestHeaders.Accept.Add(contentType);
+                    HttpResponseMessage response = client.GetAsync("/PhersonalklubbenREST/api/Medlemmars").Result;
+                    string stringData = response.Content.ReadAsStringAsync().Result;
+                    List<Medlem> data = JsonConvert.DeserializeObject<List<Medlem>>(stringData);
 
-                    //Databind the list
+                    foreach (var item in data)
+                    {
+                        if (item.GiltighetsÅr.Year == DateTime.Now.Year || item.GiltighetsÅr.Year == DateTime.Now.Year + 1)
+                        {
+                            activeRow++;
+                        }
+                    }
+
+                    totalMembers = data.Count();
+
+                    statistics.ActiveRow = activeRow;
+                    statistics.NewRegistrations = newRegistrations;
+                    statistics.TotalMembersRow = totalMembers;
+                    return View(statistics);
                 }
+
             }
             catch (Exception ex)
             {
                 //ToDo Give errormessage to user and possibly log error
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
+                return View();
             }
+
+
+            return View();
         }
+
+
+      
         //funkar
         public ActionResult ShowProfile(int id)
         {            

@@ -23,6 +23,9 @@ namespace PersonalklubbenHVAdmin.Models
         [Required]
         [StringLength(40)]
         public string Efternamn { get; set; }
+        [Required]
+        [StringLength(25)]
+        public string Telefonnummer { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -34,6 +37,9 @@ namespace PersonalklubbenHVAdmin.Models
 
         [Column(TypeName = "date")]
         public DateTime GiltighetsÅr { get; set; }
+
+        [Column(TypeName = "date")]
+        public DateTime RegistreringsDatum { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Medlemskonto> Medlemskonto { get; set; }

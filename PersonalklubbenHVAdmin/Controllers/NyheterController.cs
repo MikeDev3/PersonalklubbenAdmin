@@ -14,7 +14,7 @@ namespace PersonalklubbenHVAdmin.Controllers
     public class NyheterController : Controller
     {
         // GET: Nyheter
-        public ActionResult Index()
+        public ActionResult NyheterIndex()
         {
             try
             {

@@ -121,6 +121,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MedlemsController.cs" />
     <Compile Include="Controllers\NyheterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -129,6 +130,7 @@
     <Compile Include="Models\Medlem.cs" />
     <Compile Include="Models\Medlemskonto.cs" />
     <Compile Include="Models\Nyheter.cs" />
+    <Compile Include="Models\StaticsticModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -172,10 +174,13 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Medlems\MedlemsIndex.cshtml" />
+    <Content Include="Views\Nyheter\NyheterIndex.cshtml" />
+    <Content Include="Views\Medlems\NewRegistrations.cshtml" />
+    <Content Include="Views\Medlems\ShowProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Nyheter\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
