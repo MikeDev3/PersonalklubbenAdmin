@@ -42,9 +42,9 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Användare <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li>@Html.ActionLink("Medlemmar", "MedlemsIndex", "Medlems")</li>
+                        <li>@Html.ActionLink("Medlemmar " + DateTime.Now.Year, "MedlemsIndex", "Medlems")</li>
                         <li>@Html.ActionLink("Nya registreringar", "NewRegistrations", "Medlems")</li>
-                        <li><a href="#">Page 1-3</a></li>
+                        <li>@Html.ActionLink("Totala medlemmar", "TotalMembers", "Medlems")</li>
                     </ul>
                 </li>
                 <li>@Html.ActionLink("Nyheter", "NyheterIndex", "Nyheter")</li>

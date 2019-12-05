@@ -11,6 +11,8 @@ using System.Net.Http.Headers;
 
 namespace PersonalklubbenHVAdmin.Controllers
 {
+    // [Authorize]
+
     public class NyheterController : Controller
     {
         // GET: Nyheter

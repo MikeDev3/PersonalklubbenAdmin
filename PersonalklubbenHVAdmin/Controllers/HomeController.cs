@@ -10,6 +10,8 @@ using System.Web.Mvc;
 
 namespace Loinprojekt_admin.Controllers
 {
+    // [Authorize]
+
     public class HomeController : Controller
     {
         public ActionResult Index()

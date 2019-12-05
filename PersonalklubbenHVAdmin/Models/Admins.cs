@@ -10,15 +10,14 @@ namespace PersonalklubbenHVAdmin.Models
     {
         public int ID { get; set; }
 
-        [Required]
         [StringLength(30)]
         public string Förnamn { get; set; }
 
-        [Required]
         [StringLength(40)]
         public string Efternamn { get; set; }
 
         [Required]
+        [EmailAddress]
         [StringLength(60)]
         public string Epostadress { get; set; }
 

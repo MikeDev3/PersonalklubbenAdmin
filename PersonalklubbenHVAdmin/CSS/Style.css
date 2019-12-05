@@ -4,21 +4,19 @@
     width: 360px;
     padding: 1% 1% 10%;
     margin: auto;
-}
+
+    }
+
+
 
 .form {
-    position: absolute;
-    background-color: white;
-    opacity: 0.7;
+    position: relative;
+    background: #FFFFFF;
     max-width: 360px;
-    border-radius: 10%;
-    padding: 20px;
-    width: 40%;
-    height: 30%;
+    margin: 0 auto 100px;
     padding: 45px;
     text-align: center;
-    left: 40%;
-    top: 20%;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
 .topnav .search-container {
@@ -49,7 +47,7 @@
 
 
 .bakgrundsbildlogin {
-    background-image: url(https://scontent-arn2-1.xx.fbcdn.net/v/t1.15752-9/54236757_1329312470558574_7049580571705475072_n.png?_nc_cat=100&_nc_ht=scontent-arn2-1.xx&oh=af84e9d84b646db85d4df1ffbf21ee5e&oe=5D1A6321);
+    background-image: url("../Images/LoginImage.png");
     width: 100%;
     height: 1200px;
     background-position: center;

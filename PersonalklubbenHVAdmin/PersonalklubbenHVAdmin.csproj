@@ -121,6 +121,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MedlemsController.cs" />
     <Compile Include="Controllers\NyheterController.cs" />
     <Compile Include="Global.asax.cs">
@@ -146,6 +147,7 @@
     <Content Include="Images\blocked.png" />
     <Content Include="Images\checkedbox.png" />
     <Content Include="Images\flag.png" />
+    <Content Include="Images\LoginImage.png" />
     <Content Include="Images\PhersonalklubbenIkon.png.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -178,6 +180,8 @@
     <Content Include="Views\Nyheter\NyheterIndex.cshtml" />
     <Content Include="Views\Medlems\NewRegistrations.cshtml" />
     <Content Include="Views\Medlems\ShowProfile.cshtml" />
+    <Content Include="Views\Medlems\TotalMembers.cshtml" />
+    <Content Include="Views\Login\LoginIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
