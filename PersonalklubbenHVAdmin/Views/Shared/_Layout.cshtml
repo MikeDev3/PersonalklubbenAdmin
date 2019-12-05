@@ -22,9 +22,9 @@
 
             @if (HttpContext.Current.Session["admin"] != null)
             {
-                <div style="margin-right: 0%">
-                    @*<p style="color: black" class="menuBarItem"> @ViewBag.Username </p>
-                        <button class="logoutbtn">@Html.ActionLink("Logga ut", "LogOut", "Login", null, new { @class = "logoutBtnColor" })</button>*@
+                <div >
+                    <p style="color: black; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif" class="menuBarItem"> @ViewBag.Username </p>
+                        <button class="logoutbtn">@Html.ActionLink("Logga ut", "LogOut", "Login", null, new { @class = "logoutBtnColor" })</button>
                 </div>
             }
 

@@ -16,10 +16,17 @@ namespace Loinprojekt_admin.Controllers
     {
         public ActionResult Index()
         {
-            //Models.AdminModel sessionObjekt = (Models.AdminModel)Session["admin"];
+            Admins sessionObjekt = (Admins)Session["admin"];
 
-            //ViewBag.Username = "Inloggad som: " + sessionObjekt.username;
-            //ShowMembers();
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("LoginIndex", "Login");
+            }
+            else
+            {
+                ViewBag.Username = "Inloggad som: " + sessionObjekt.Förnamn;
+
+            }
 
             int activeRow = 0;
             int newRegistrations = 0;

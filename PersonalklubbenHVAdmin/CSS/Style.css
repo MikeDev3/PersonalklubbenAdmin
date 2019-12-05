@@ -104,20 +104,19 @@ input[type=button], input[type=submit], input[type=reset] {
 }
 
 .menuBarItem {
-    font-size: 18px;
-    margin: -15%;
-    margin-left: -80%;
+    font-size: 15px;
+    margin-top: 100%;
+    margin-left: -40%;
 }
 
 .logoutbtn {
-    margin-left: 50%;
+    margin-left: -40%;
     background-color: limegreen;
     border: none;
     border-radius: 6px;
     padding: 15px 20px;
     text-align: center;
     font-size: 16px;
-    margin: 30% -67%;
     transition: 0.3s;
     display: inline-block;
     cursor: pointer;

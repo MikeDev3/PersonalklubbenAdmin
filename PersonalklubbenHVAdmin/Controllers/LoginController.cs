@@ -22,21 +22,31 @@ namespace PersonalklubbenHVAdmin.Controllers
         [HttpPost]
         public async Task<ActionResult> LoginIndex(Admins admin)
         {
+           
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://193.10.202.76/");
+                client.BaseAddress = new Uri("http://193.10.202.76/PhersonalklubbenREST/");
 
                 var myContent = JsonConvert.SerializeObject(admin);
                 var buffer = Encoding.UTF8.GetBytes(myContent);
                 var byteContent = new ByteArrayContent(buffer);
                 byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                var result = client.PostAsync("api/AdminLogin/PostAdmin", byteContent).Result;
+
+                var result = client.PostAsync("api/AdminLogin", byteContent).Result;
 
                 string data = await result.Content.ReadAsStringAsync();
                 Session["Username"] = "Admin - " + data;
 
                 if (result.IsSuccessStatusCode)
                 {
+                    Admins session = new Admins();
+                    session = GetAdminObject();
+                    if (session != null)
+                    {
+                        Session["admin"] = session;
+
+                    }
+
                     System.Web.Security.FormsAuthentication.RedirectFromLoginPage(admin.Epostadress, false);
                     return RedirectToAction("Index", "Home");
 
@@ -49,6 +59,37 @@ namespace PersonalklubbenHVAdmin.Controllers
                 }
 
             }
+        }
+        public Admins GetAdminObject()
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri("http://193.10.202.76/");
+                    MediaTypeWithQualityHeaderValue contentType = new MediaTypeWithQualityHeaderValue("application/json");
+                    client.DefaultRequestHeaders.Accept.Add(contentType);
+                    HttpResponseMessage response = client.GetAsync("/PhersonalklubbenREST/api/Admins").Result;
+                    string stringData = response.Content.ReadAsStringAsync().Result;
+                    Admins data = JsonConvert.DeserializeObject<Admins>(stringData);
+                    return data;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                //ToDo Give errormessage to user and possibly log error
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+                Admins emptyAdmin = new Admins();
+                return emptyAdmin;
+
+            }
+
+        }
+        public ActionResult LogOut()
+        {
+            System.Web.Security.FormsAuthentication.SignOut();
+            return RedirectToAction("LoginIndex");
         }
     }
 }
