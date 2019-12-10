@@ -1,7 +1,74 @@
-﻿
+﻿@model IEnumerable<PersonalklubbenHVAdmin.Models.Appliances>
 @{
-    ViewBag.Title = "NewRegistrations";
+    ViewBag.Title = "Ansökningar om medlemsskap";
 }
 
-<h2>NewRegistrations</h2>
+<div class="input-group">
+    <input aria-describedby="basic-addon1" class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Sök efter namn..." title="Skriv in ett namn">
+</div>
+
+
+<h2 style="color: red; ">@Html.ValidationMessage("Felmeddelande")</h2>
+
+@if (Model.Count() > 0)
+{
+
+    <h2 style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Lista över aktiva användare</h2>
+    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+        <table id="myTable" style="overflow-y: auto" class="table">
+            <tr>
+
+                <th class="th">Epost</th>
+                <th class="th">Namn</th>
+                <th class="th">Institution</th>
+                <th class="th">Medlem sedan</th>
+                <th class="th">Giltig till</th>
+                <th class="th">Radera konto</th>
+                <th class="th">Blockera</th>
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="font-weight: bold; font-style:italic">@Html.ActionLink((string)item.Email, "ShowProfile", new { id = item.ID })</td>
+                    <td>@Html.DisplayFor(m => item.Firstname) @Html.DisplayFor(m => item.Lastname)</td>
+                    <td>@Html.DisplayFor(m => item.Institution)</td>
+                    <td>@(item.RegistreredDate.ToString("yyyy/MM/dd"))</td>
+                    <td>@(item.ValidToDate.ToString("yyyy/MM/dd"))</td>
+
+
+                    <td>@Html.ActionLink("Hantera ansökan", "ApproveMembership", new { id = item.ID })</td>
+                </tr>
+            }
+
+        </table>
+    </div>
+}
+else
+{
+    <h2 style="color: red">Det verkar inte finnas några nya ansökningar.</h2>
+}
+
+
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
 

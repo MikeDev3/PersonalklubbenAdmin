@@ -128,6 +128,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Admins.cs" />
+    <Compile Include="Models\Appliances.cs" />
     <Compile Include="Models\Medlem.cs" />
     <Compile Include="Models\Medlemskonto.cs" />
     <Compile Include="Models\Nyheter.cs" />
@@ -182,6 +183,7 @@
     <Content Include="Views\Medlems\ShowProfile.cshtml" />
     <Content Include="Views\Medlems\TotalMembers.cshtml" />
     <Content Include="Views\Login\LoginIndex.cshtml" />
+    <Content Include="Views\Medlems\ApproveMembership.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
