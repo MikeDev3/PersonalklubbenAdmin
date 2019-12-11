@@ -25,9 +25,9 @@ namespace PersonalklubbenHVAdmin.Controllers
                     client.BaseAddress = new Uri("http://193.10.202.76/");
                     MediaTypeWithQualityHeaderValue contentType = new MediaTypeWithQualityHeaderValue("application/json");
                     client.DefaultRequestHeaders.Accept.Add(contentType);
-                    HttpResponseMessage response = client.GetAsync("/PhersonalklubbenREST/api/Medlemmars").Result;
+                    HttpResponseMessage response = client.GetAsync("/PhersonalklubbenREST/api/Nyheters").Result;
                     string stringData = response.Content.ReadAsStringAsync().Result;
-                    List<Medlem> data = JsonConvert.DeserializeObject<List<Medlem>>(stringData);
+                    List<Nyheter> data = JsonConvert.DeserializeObject<List<Nyheter>>(stringData);
                     return View(data);
                 }
 
@@ -39,6 +39,10 @@ namespace PersonalklubbenHVAdmin.Controllers
                 return View();
             }
 
+        }
+        public ActionResult CreateNews()
+        {
+            return View();
         }
     }
 }

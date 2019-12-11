@@ -20,7 +20,9 @@
                     <img src="~/fonts/checkedbox.png" alt="Userimage" style="width:100%">
                     <div class="w3-container">
                         <h1 class="w3-xxlarge w3-text-red"><b>Aktiva användare @DateTime.Now.Year</b></h1> <br />
-                        <h1 style="color: lawngreen; text-align:center" class="w3-xxxlarge"><b>@Html.ActionLink((string)Model.ActiveRow.ToString(), "MedlemsIndex", "Medlems")</b></h1>
+                       
+                        @*<h1 style="color: lawngreen; text-align:center" class="w3-xxxlarge"><b>@Html.ActionLink((string)Model.ActiveRow.ToString(), "MedlemsIndex", "Medlems")</b></h1>*@                       
+
                     </div>
                 </div>
             </div>
@@ -30,7 +32,7 @@
                     <img src="~/fonts/flag.png" alt="Userimage" style="width:100%">
                     <div class="w3-container">
                         <h1 class="w3-xxlarge w3-text-red"><b>Hantera registreringar</b></h1> <br />
-                        <h1 style="color: aqua; text-align:center" class="w3-xxxlarge"><b>@Html.ActionLink((string)Model.NewRegistrations.ToString(), "NewRegistrations", "Medlems")</b></h1>
+                        @*<h1 style="color: aqua; text-align:center" class="w3-xxxlarge"><b>@Html.ActionLink((string)Model.NewRegistrations.ToString(), "NewRegistrations", "Medlems")</b></h1>*@
                     </div>
                 </div>
             </div>
@@ -40,7 +42,7 @@
                     <img src="~/fonts/blocked.png" alt="Userimage" style="width:100%">
                     <div class="w3-container">
                         <h1 class="w3-xxlarge w3-text-red"><b>Totala registreringar</b></h1><br />
-                        <h1 style="color: orange; text-align:center" class="w3-xxxlarge"><b>@Html.ActionLink((string)Model.TotalMembersRow.ToString(), "TotalMembers", "Medlems")</b></h1>
+                        @*<h1 style="color: orange; text-align:center" class="w3-xxxlarge"><b>@Html.ActionLink((string)Model.TotalMembersRow.ToString(), "TotalMembers", "Medlems")</b></h1>*@
 
                     </div>
                 </div>

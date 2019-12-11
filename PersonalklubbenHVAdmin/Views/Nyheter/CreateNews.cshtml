@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Publicera nyhet";
+}
+
+
+@*<section style="align-content: center" class="" id="form1-4" data-rv-view="791">*@
+
+
+<div style="margin-left: 100px; margin-right: 100px;" class="w3-main">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="title col-12 col-lg-8">
+                <h2 class="mbr-section-title align-center pb-3 mbr-fonts-style display-2">
+                    Fyll i formuläret för att publicera nyhet
+                </h2>
+
+            </div>
+        </div>
+    </div>
+    <div class="container" style="width: 1500px;">
+        <div class="row justify-content-center">
+            <div class="media-container-column col-lg-8" data-form-type="formoid">
+                <div data-form-alert="" hidden="">
+                    Thanks for filling out the form!
+                </div>
+
+                <form  method="post">
+                    <input type="hidden" data-form-email="true">
+                    <div class="row row-sm-offset">
+                        <div class="col-md-4 multi-horizontal" data-for="name">
+                            <div class="form-group">
+                                <label class="form-control-label mbr-fonts-style display-7" for="name-form1-4">Rubrik</label>
+                                <input type="text" class="form-control" name="name" data-form-field="Name" required="" id="name-form1-4">
+                            </div>
+                        </div>
+                        <div class="col-md-4 multi-horizontal" data-for="email">
+                            <div class="form-group">
+                                <label class="form-control-label mbr-fonts-style display-7" for="email-form1-4">Underrubrik</label>
+                                <input type="email" class="form-control" name="email" data-form-field="Email" required="" id="email-form1-4">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group" style="width: 1400px" data-for="message">
+                        <label class="form-control-label mbr-fonts-style display-7" for="message-form1-5">Information om nyhet</label>
+                        <textarea type="text" class="form-control" name="message" rows="15" data-form-field="Message" id="message-form1-4"></textarea>
+                    </div>
+
+                    <span style="font-family:'Berlin Sans FB'" class="input-group-btn"><button href="" type="submit" class="btn btn-form logoutbtn">Publicera Nyhet</button></span>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@*</section>*@

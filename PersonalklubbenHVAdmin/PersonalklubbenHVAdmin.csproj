@@ -149,6 +149,7 @@
     <Content Include="Images\checkedbox.png" />
     <Content Include="Images\flag.png" />
     <Content Include="Images\LoginImage.png" />
+    <Content Include="Images\MessageIcon.png" />
     <Content Include="Images\PhersonalklubbenIkon.png.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -184,6 +185,7 @@
     <Content Include="Views\Medlems\TotalMembers.cshtml" />
     <Content Include="Views\Login\LoginIndex.cshtml" />
     <Content Include="Views\Medlems\ApproveMembership.cshtml" />
+    <Content Include="Views\Nyheter\CreateNews.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

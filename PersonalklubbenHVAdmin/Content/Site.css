@@ -17,11 +17,35 @@
 }
 
 .blockBtn {
-    width: 8%;
-    font-size: 15px;
-    border-radius: 8px;
+    background-color: orangered;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 15px;
+    text-align: center;
+    font-size: 12px;
+    transition: 0.3s;
+    display: inline-block;
+    cursor: pointer;
+}
+.blockBtn:hover{
     background-color: red;
 }
+
+.editBtn {
+    background-color: orange;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 15px;
+    text-align: center;
+    font-size: 12px;
+    transition: 0.3s;
+    display: inline-block;
+    cursor: pointer;
+}
+
+    .editBtn:hover {
+        background-color: lightcoral;
+    }
 
 .blockbtnColor {
     color: white;

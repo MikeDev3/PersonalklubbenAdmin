@@ -16,7 +16,7 @@
 </head>
 <body>
     <div class="header">
-        <a href="@Url.Action("Index", "Home")"> <img style="width: 20%; padding-left:5%; padding-top: 2%; " src="~/Images/PhersonalklubbenIkon.png.jpg" /></a>
+        <a href="@Url.Action("Index", "Home")"> <img class="logoImg" style="width: 20%; padding-left:5%; padding-top: 2%; " src="~/Images/PhersonalklubbenIkon.png.jpg" /></a>
 
         <div style="float:right">
 
@@ -47,7 +47,15 @@
                         <li>@Html.ActionLink("Totala medlemmar", "TotalMembers", "Medlems")</li>
                     </ul>
                 </li>
-                <li>@Html.ActionLink("Nyheter", "NyheterIndex", "Nyheter")</li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Nyheter <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+
+                        <li>@Html.ActionLink("Nyheter", "NyheterIndex", "Nyheter")</li>
+                        <li>@Html.ActionLink("Publicera nyhet", "CreateNews", "Nyheter")</li>
+
+                    </ul>
+                </li>
             </ul>
         </div>
     </nav>
@@ -59,7 +67,7 @@
     </div>
     <div class="footer">
         <br />
-        <a href="@Url.Action("Index", "Home")"> <img style="width: 20%; padding-left:5%; " src="~/Images/PhersonalklubbenIkon.png.jpg" /></a>
+        <a href="@Url.Action("Index", "Home")"> <img class="logoImg" style="width: 20%; padding-left:5%; " src="~/Images/PhersonalklubbenIkon.png.jpg" /></a>
         <p style="color: limegreen">&copy; @DateTime.Now.Year - Phersonalklubben Högskolan Väst</p>
     </div>
     @Scripts.Render("~/bundles/jquery")
