@@ -9,9 +9,17 @@
     <div class="table-users table-wrapper-scroll-y my-custom-scrollbar">
         <div class="customHeader">
             Senaste nytt
-            <button class="createNewPostButton">@Html.ActionLink("Skapa nyhet", "CreateNews", "Nyheter", null, new { @class = "logoutBtnColor" }) <span class="glyphicon glyphicon-cog"></span></button>
 
-        </div>
+            @*<button class="createNewPostButton">@Html.ActionLink("Skapa nyhet", "CreateNews", "Nyheter", null, new { @class = "logoutBtnColor btn " }) <span class="glyphicon glyphicon-cog"></span></button>*@
+            @*<input style="margin-left: 50px" type="button" class="createNewPostButton logoutBtnColor btn " value="Skapa nyhet!" onclick="location.href='@Url.Action("CreateNews", "Nyheter")'" />
+            <div>
+                @Html.ActionLink("Skapa nyhet", "CreateNews", "Nyheter", null, new { @class = "createNewPostButton logoutBtnColor btn " })
+                <span class="glyphicon glyphicon-cog"> </span>
+                </div>*@
+                
+            <a href="@Url.Action("CreateNews", "Nyheter")" class="createNewPostButton logoutBtnColor btn"><span class="glyphicon glyphicon-cog" ></span> Skapa nyhet</a>
+
+            </div>
            
             
    
@@ -23,7 +31,9 @@
                 <th>Underrubrik</th>
                 <th></th>
                 <th width="630">Innehåll</th>
-                <th>Hantera</th>
+                <th>Radera</th>
+                <th>Ändra</th>
+
             </tr>
 
             @foreach (var item in Model)
@@ -38,8 +48,14 @@
                 <td></td>
                 <td>@Html.DisplayFor(m => item.Beskrivning)</td>
                 <td>
-                        <button class="blockBtn"><span class="glyphicon glyphicon-trash"></span>&nbsp;Radera</button>
-                        <button class="editBtn"><span class="glyphicon glyphicon-cog"></span>&nbsp;Ändra</button>
+                    @*<button class="blockBtn"><span class="glyphicon glyphicon-trash" onclick="return myFunction()"></span>&nbsp;@Html.ActionLink("Radera", "DeleteNewsPost", new { id = item.ID }, new { onclick = "return confirm('Är du säker på att du vill radera denna nyhet?');" })</button>
+        <button class="editBtn"><span class="glyphicon glyphicon-cog"></span>&nbsp;Ändra</button>*@
+                    <a href="@Url.Action("DeleteNewsPost", "Nyheter", new { id = item.ID })" onclick="return confirm('Är du säker på att du vill radera denna nyhet?');" class="blockBtn logoutBtnColor btn"><span class="glyphicon glyphicon-trash"></span> Radera</a>
+
+                </td>
+                <td>
+                    <a href="@Url.Action("EditNews", "Nyheter", new { id = item.ID })" class="editBtn logoutBtnColor btn"><span class="glyphicon glyphicon-cog"></span> Ändra</a>
+
                 </td>
             </tr>
 
@@ -52,3 +68,5 @@ else
 {
     <h2>Inga nyheter att visa</h2>
 }
+
+   

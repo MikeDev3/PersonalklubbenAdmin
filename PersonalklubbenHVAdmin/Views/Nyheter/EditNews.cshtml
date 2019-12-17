@@ -1,0 +1,71 @@
+﻿@model PersonalklubbenHVAdmin.Models.Nyheter
+@{
+    ViewBag.Title = "Ändra nyhet";
+}
+
+
+@*<section style="align-content: center" class="" id="form1-4" data-rv-view="791">*@
+
+
+<div style="margin-left: 100px; margin-right: 100px;" class="w3-main">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="title col-12 col-lg-8">
+                <h2 class="mbr-section-title align-center pb-3 mbr-fonts-style display-2">
+                    Fyll i formuläret för att publicera nyhet
+                </h2>
+
+            </div>
+        </div>
+    </div>
+    <div class="container" style="width: 1500px;">
+        <div class="row justify-content-center">
+            <div class="media-container-column col-lg-8" data-form-type="formoid">
+                <div data-form-alert="" hidden="">
+                    Thanks for filling out the form!
+                </div>
+
+                @using (Html.BeginForm())
+                {
+                    <form method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" data-form-email="true">
+                        <div class="row row-sm-offset">
+                            <div class="col-md-4 multi-horizontal" data-for="name">
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" for="name-form1-4">Rubrik</label>
+                                    <div>
+
+                                        @Html.EditorFor(model => model.Rubrik, new { htmlAttributes = new { @type = "text", @class = "form-control" } })
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4 multi-horizontal" data-for="email">
+                                <div class="form-group">
+                                    <label class="form-control-label mbr-fonts-style display-7" for="email-form1-4">Underrubrik</label>
+                                    @Html.EditorFor(model => model.Underrubrik, new { htmlAttributes = new { @type = "text", @class = "form-control" } })
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group" style="width: 1400px" data-for="message">
+                            <label class="form-control-label mbr-fonts-style display-7" for="message-form1-5">Information om nyhet</label>
+                            @Html.TextAreaFor(model => model.Beskrivning, new { @class = "form-control", @rows = 15 })
+                            @Html.HiddenFor(model => model.PubliceringsDatum)
+
+
+                        </div>
+
+                        <span style="font-family:'Berlin Sans FB'" class="input-group-btn"><input href="" type="submit" class="btn btn-form logoutbtn" value="Uppdatera Nyhet" /></span>
+
+                    </form>
+                }
+            </div>
+            <h2 style="color: red; ">@Html.ValidationMessage("Felmeddelande")</h2>
+        </div>
+    </div>
+</div>
+@*</section>*@

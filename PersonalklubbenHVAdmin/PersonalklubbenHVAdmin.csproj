@@ -186,6 +186,7 @@
     <Content Include="Views\Login\LoginIndex.cshtml" />
     <Content Include="Views\Medlems\ApproveMembership.cshtml" />
     <Content Include="Views\Nyheter\CreateNews.cshtml" />
+    <Content Include="Views\Nyheter\EditNews.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
