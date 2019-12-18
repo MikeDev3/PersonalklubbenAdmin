@@ -55,6 +55,7 @@
                             <label class="form-control-label mbr-fonts-style display-7" for="message-form1-5">Information om nyhet</label>
                             @Html.TextAreaFor(model => model.Beskrivning, new { @class = "form-control", @rows = 15 })
                             @Html.HiddenFor(model => model.PubliceringsDatum)
+                            @Html.HiddenFor(Model => Model.ID)
 
 
                         </div>

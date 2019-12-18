@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using System.Threading.Tasks;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Net.Http;
+
 
 namespace PersonalklubbenHVAdmin.Controllers
 {
@@ -129,6 +131,55 @@ namespace PersonalklubbenHVAdmin.Controllers
         [HttpPost]
         public async Task<ActionResult> EditNews(Nyheter updatedNews)
         {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri("http://193.10.202.76/");
+
+                    var myContent = JsonConvert.SerializeObject(updatedNews);
+                    var buffer = Encoding.UTF8.GetBytes(myContent);
+                    var byteContent = new ByteArrayContent(buffer);
+                    byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                    var result = client.PostAsync("PhersonalklubbenREST/api/UppdateraNyhet", byteContent).Result;
+                    string data = await result.Content.ReadAsStringAsync();
+                    if (result.IsSuccessStatusCode)
+                    {
+                        ModelState.AddModelError("Felmeddelande", "Nyhet uppdaterad");
+                        return RedirectToAction("NyheterIndex");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Felmeddelande", "Något gick fel");
+                        return RedirectToAction("CreateNews");
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+
+                ModelState.AddModelError("Felmeddelande", "Denna användare kan inte hittas.");
+                return RedirectToAction("NewRegistrations");
+            }
+
+            //using (var client = new HttpClient())
+            //{
+            //    client.BaseAddress = new Uri("http://193.10.202.76/");
+            //    var response = client.PutAsJsonAsync("PhersonalklubbenREST/api/Nyheters", updatedNews).Result;
+            //    if (response.IsSuccessStatusCode)
+            //    {
+            //        Console.Write("Success");
+            //        return RedirectToAction("NyhetersIndex");
+            //    }
+            //    else
+            //    {
+            //        Console.Write("Error");
+            //        return RedirectToAction("Index", "Home");
+
+            //    }
+
 
             //using (HttpClient client = new HttpClient())
             //{
@@ -148,7 +199,7 @@ namespace PersonalklubbenHVAdmin.Controllers
             //        if (result.IsSuccessStatusCode)
             //        {
             //            ModelState.AddModelError("Felmeddelande", "Nyhet ändrad");
-            //            return RedirectToAction("NyheterIndex");                       
+            //            return RedirectToAction("NyheterIndex");
             //        }
             //        else
             //        {
@@ -165,41 +216,43 @@ namespace PersonalklubbenHVAdmin.Controllers
             //    }
             //}
 
-            try
-            {
-                using (HttpClient client = new HttpClient())
-                {
-                    client.BaseAddress = new Uri("http://193.10.202.76/");
+            //try
+            //{
+            //    using (HttpClient client = new HttpClient())
+            //    {
+            //        client.BaseAddress = new Uri("http://193.10.202.76/");
 
-                    var myContent = JsonConvert.SerializeObject(updatedNews);
-                    var buffer = Encoding.UTF8.GetBytes(myContent);
-                    var byteContent = new ByteArrayContent(buffer);
-                    byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            //        var myContent = JsonConvert.SerializeObject(updatedNews);
+            //        var buffer = Encoding.UTF8.GetBytes(myContent);
+            //        var byteContent = new ByteArrayContent(buffer);
+            //        byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-                    var result = client.PutAsync("PhersonalklubbenREST/api/Nyheters", byteContent).Result;
-                    string data = await result.Content.ReadAsStringAsync();
-                    if (result.IsSuccessStatusCode)
-                    {
-                        ModelState.AddModelError("Felmeddelande", "Nyhet ändrad");
-                        return RedirectToAction("NyheterIndex");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("Felmeddelande", "Något gick fel");
-                        return RedirectToAction("NyheterIndex");
-                    }
-                }
-            }
-            catch (Exception)
-            {
+            //        var result = client.PutAsync("PhersonalklubbenREST/api/Nyheters", byteContent).Result;
+            //        string data = await result.Content.ReadAsStringAsync();
+            //        if (result.IsSuccessStatusCode)
+            //        {
+            //            ModelState.AddModelError("Felmeddelande", "Nyhet ändrad");
+            //            return RedirectToAction("NyheterIndex");
+            //        }
+            //        else
+            //        {
+            //            ModelState.AddModelError("Felmeddelande", "Något gick fel");
+            //            return RedirectToAction("NyheterIndex");
+            //        }
+            //    }
+            //}
+            //catch (Exception)
+            //{
 
-                ModelState.AddModelError("Felmeddelande", "Denna användare kan inte hittas.");
-                return RedirectToAction("NyheterIndex");
-            }
+            //    ModelState.AddModelError("Felmeddelande", "Denna användare kan inte hittas.");
+            //    return RedirectToAction("NyheterIndex");
+            //}
+
         }
 
-        public Nyheter GetNewsById (int id)
-        {
+            public Nyheter GetNewsById (int id)
+        { 
+        
             try
             {
                 using (HttpClient client = new HttpClient())

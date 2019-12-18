@@ -24,7 +24,7 @@
 
                 <th class="th">Giltig till</th>
                 <th class="th">Radera konto</th>
-                <th class="th">Blockera</th>
+                <th class="th">Medlemsstatus</th>
 
             </tr>
 
@@ -39,6 +39,19 @@
 
 
                 <td>@Html.ActionLink("Radera", "Delete", new { id = item.ID })</td>
+
+                @if (item.GiltighetsÅr.Year < DateTime.Now.Year)
+                {
+                    <td><a href="@Url.Action("EditNews", "Nyheter", new { id = item.ID })" class="editBtn logoutBtnColor btn"><span class="glyphicon glyphicon-cog"></span> Förnya medlemsskap</a> </td>
+
+                }
+                else
+                {
+                    <td style="text-align:center"><h4><span class="glyphicon glyphicon-saved"> Aktiv</span></h4> </td>
+                }
+
+
+
 
             </tr>
             }
