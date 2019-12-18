@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using PersonalklubbenHVAdmin.Models;
+using PersonalklubbenHVAdmin.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -221,6 +222,41 @@ namespace PersonalklubbenHVAdmin.Controllers
                 return emptyObject;
 
             }
+        }
+        public ActionResult CreateMember()
+        {
+            CreateMemberViewmodel viewmodel = new CreateMemberViewmodel();
+            viewmodel.Institutions.Add("Ekonomi & IT (EI)");
+            viewmodel.Institutions.Add("Ingenjörsvetenskap(IV)");
+            viewmodel.Institutions.Add("Institutionen för hälsovetenskap(IH)");
+            viewmodel.Institutions.Add("Individ och samhälle(IoS)");
+            viewmodel.Institutions.Add("Förvaltning(Forv)");
+            viewmodel.Institutions.Add("Studentstöd och bibliotek(SoB)");
+            viewmodel.Institutions.Add("Rektor(R)");
+
+            const int numberOfYears = 3;
+            var startYear = DateTime.Now.Year;
+            var endYear = startYear + numberOfYears;
+
+            var yearList = new List<SelectListItem>();
+            for (var i = startYear; i < endYear; i++)
+            {
+                yearList.Add(new SelectListItem() { Value = i.ToString(), Text = i.ToString() });
+            }
+            var list = new List<DateTime>();
+            list.Add(new DateTime(DateTime.Now.Year, 12, 31));
+            list.Add(new DateTime(DateTime.Now.Year + 1, 12, 31));
+            list.Add(new DateTime(DateTime.Now.Year + 2, 12, 31));
+
+            viewmodel.years = list;
+
+           
+            return View(viewmodel);
+        }
+        [HttpPost]
+        public ActionResult CreateMember (Medlem nyMedlem)
+        {
+            return View();
         }
     }
 }
