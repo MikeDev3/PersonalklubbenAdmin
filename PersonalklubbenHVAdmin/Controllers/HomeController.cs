@@ -70,7 +70,6 @@ namespace Loinprojekt_admin.Controllers
             }
 
 
-            return View();
         }
 
 

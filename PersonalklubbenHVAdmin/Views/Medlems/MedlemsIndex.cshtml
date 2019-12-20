@@ -34,14 +34,17 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td style="font-weight: bold; font-style:italic">@Html.ActionLink((string)item.Epostadress, "ShowProfile", new { id = item.ID })</td>
+                    <td style="font-weight: bold; font-style:italic; text-align:left">@Html.ActionLink((string)item.Epostadress, "ShowProfile", new { id = item.ID })</td>
                     <td>@Html.DisplayFor(m => item.Förnamn) @Html.DisplayFor(m => item.Efternamn)</td>
                     <td>@Html.DisplayFor(m => item.Institution)</td>
                     <td>@(item.RegistreringsDatum.ToString("yyyy/MM/dd"))</td>
                     <td>@(item.GiltighetsÅr.ToString("yyyy/MM/dd"))</td>
 
 
-                    <td>@Html.ActionLink("Radera", "Delete", new { id = item.ID })</td>
+                    @*<td>@Html.ActionLink("Radera", "Delete", new { id = item.ID })</td>*@
+                    <td>
+                        <a href="@Url.Action("DeleteMember", "Medlems", new { id = item.ID })" onclick="return confirm('Är du säker på att du vill radera denna medlem?');" class="blockBtn logoutBtnColor btn"><span class="glyphicon glyphicon-trash"></span> Radera</a>
+                    </td>
                     <td>@Html.ActionLink("Blockera", "BlockUser", new { id = item.ID })</td>
 
                 </tr>

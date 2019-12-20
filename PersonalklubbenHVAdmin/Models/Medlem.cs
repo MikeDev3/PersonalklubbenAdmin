@@ -16,8 +16,9 @@ namespace PersonalklubbenHVAdmin.Models
 
         public int ID { get; set; }
 
-        [Required]
-        [StringLength(25)]
+        [Required(ErrorMessage = "Please enter name")]
+        //[RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$",
+        // ErrorMessage = "Characters are not allowed.")]
         public string Förnamn { get; set; }
 
         [Required]
