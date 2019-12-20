@@ -9,7 +9,6 @@ using System.Web.Mvc;
 using System.Threading.Tasks;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Net.Http;
 
 
 namespace PersonalklubbenHVAdmin.Controllers

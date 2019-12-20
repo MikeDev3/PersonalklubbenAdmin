@@ -3,15 +3,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace PersonalklubbenHVAdmin.ViewModels
 {
     public class CreateMemberViewmodel
     {
-        public  List<DateTime> years = new List<DateTime>();
-        public List<string> Institutions = new List<string>();
+        public List<DateTime> years { get; set; }
+        public List<string> Institutions { get; set; }
 
-        public Medlem medlem = new Medlem();
+        public Medlem medlem { get; set; }
+
+     
          
 
     }

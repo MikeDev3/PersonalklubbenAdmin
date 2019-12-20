@@ -18,7 +18,9 @@ namespace PersonalklubbenHVAdmin.Controllers
     public class MedlemsController : Controller
     {
         List<Medlem> memberList = new List<Medlem>();
-        
+        CreateMemberViewmodel data = new CreateMemberViewmodel();
+
+
         // GET: Medlems
         public ActionResult MedlemsIndex()
         {
@@ -225,38 +227,105 @@ namespace PersonalklubbenHVAdmin.Controllers
         }
         public ActionResult CreateMember()
         {
-            CreateMemberViewmodel viewmodel = new CreateMemberViewmodel();
-            viewmodel.Institutions.Add("Ekonomi & IT (EI)");
-            viewmodel.Institutions.Add("Ingenjörsvetenskap(IV)");
-            viewmodel.Institutions.Add("Institutionen för hälsovetenskap(IH)");
-            viewmodel.Institutions.Add("Individ och samhälle(IoS)");
-            viewmodel.Institutions.Add("Förvaltning(Forv)");
-            viewmodel.Institutions.Add("Studentstöd och bibliotek(SoB)");
-            viewmodel.Institutions.Add("Rektor(R)");
+            CreateMemberViewmodel data = new CreateMemberViewmodel();
 
-            const int numberOfYears = 3;
-            var startYear = DateTime.Now.Year;
-            var endYear = startYear + numberOfYears;
+            List<string> names = new List<string>();
 
-            var yearList = new List<SelectListItem>();
-            for (var i = startYear; i < endYear; i++)
-            {
-                yearList.Add(new SelectListItem() { Value = i.ToString(), Text = i.ToString() });
-            }
+            names.Add("Ekonomi & IT (EI)");
+            names.Add("Ingenjörsvetenskap(IV)");
+            names.Add("Institutionen för hälsovetenskap(IH)");
+            names.Add("Individ och samhälle(IoS)");
+            names.Add("Förvaltning(Forv)");
+            names.Add("Studentstöd och bibliotek(SoB)");
+            names.Add("Rektor(R)");
+
+            data.Institutions = names;
+
+            //years.Add(new DateTime(DateTime.Now.Year, 12, 31));
+            //years.Add(new DateTime(DateTime.Now.Year + 1, 12, 31));
+            //years.Add(new DateTime(DateTime.Now.Year + 2, 12, 31));
+
+
+            //const int numberOfYears = 3;
+            //var startYear = DateTime.Now.Year;
+            //var endYear = startYear + numberOfYears;
+
+            //var yearList = new List<SelectListItem>();
+            //for (var i = startYear; i < endYear; i++)
+            //{
+            //    yearList.Add(new SelectListItem() { Value = i.ToString(), Text = i.ToString() });
+            //}
             var list = new List<DateTime>();
             list.Add(new DateTime(DateTime.Now.Year, 12, 31));
             list.Add(new DateTime(DateTime.Now.Year + 1, 12, 31));
             list.Add(new DateTime(DateTime.Now.Year + 2, 12, 31));
 
-            viewmodel.years = list;
+            data.years = list;
 
            
-            return View(viewmodel);
+            return View(data);
         }
         [HttpPost]
-        public ActionResult CreateMember (Medlem nyMedlem)
+        public async Task<ActionResult> CreateMember (CreateMemberViewmodel nyMedlem)
         {
-            return View();
+            Medlem newMember = new Medlem();
+            newMember.Förnamn = nyMedlem.medlem.Förnamn;
+            newMember.Efternamn = nyMedlem.medlem.Efternamn;
+            newMember.Epostadress = nyMedlem.medlem.Epostadress;
+            newMember.Telefonnummer = nyMedlem.medlem.Telefonnummer;
+            newMember.RegistreringsDatum = DateTime.Now;
+
+            string institution = "";
+            DateTime validdate = DateTime.MinValue; // Only for declaration, will give the output 1/1/0001 12:00:00 AM so it atleast wont be usable as a valid user.
+
+            foreach (var item in nyMedlem.Institutions)
+            {
+                institution = item;
+            }
+            foreach (var item in nyMedlem.years)
+            {
+                validdate = item;
+            }
+            newMember.Institution = institution;
+            newMember.GiltighetsÅr = validdate;
+
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri("http://193.10.202.76/");
+
+                    var myContent = JsonConvert.SerializeObject(newMember);
+                    var buffer = Encoding.UTF8.GetBytes(myContent);
+                    var byteContent = new ByteArrayContent(buffer);
+                    byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                    var result = client.PostAsync("PhersonalklubbenREST/api/Medlemmars", byteContent).Result;
+                    string data = await result.Content.ReadAsStringAsync();
+                    if (result.IsSuccessStatusCode)
+                    {
+                        ModelState.AddModelError("Felmeddelande", "Användare tillagd!");
+                        ViewBag.Message = String.Format("Ny medlem tillagd!\n Registrerades den{0}.",  DateTime.Now.ToString());
+                        return RedirectToAction("MedlemsIndex");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Felmeddelande", "Något gick fel");
+                        ViewBag.Message = "Något gick fel";
+                        
+
+                        return RedirectToAction("CreateMember");
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+
+                ModelState.AddModelError("Felmeddelande", "Denna användare kan inte hittas.");
+                return RedirectToAction("MedlemsIndex");
+            }
+
         }
     }
 }

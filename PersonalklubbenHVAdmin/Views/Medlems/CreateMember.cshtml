@@ -1,6 +1,6 @@
 ﻿@model PersonalklubbenHVAdmin.ViewModels.CreateMemberViewmodel
 @{
-    ViewBag.Title = "CreateMember";
+    ViewBag.Title = "Create Member";
 }
 
 <h2>Registrera ny medlem  <span class="glyphicon glyphicon-plus-sign"></span> </h2>
@@ -10,7 +10,7 @@
     <hr>
     <div class="row">
         <!-- left column -->
-       <!-- <div class="col-md-3">
+        <!-- <div class="col-md-3">
             <div class="text-center">
                 <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
                 <h6>Upload a different photo...</h6>
@@ -26,81 +26,132 @@
             </div>
             <h3>Personlig information</h3>-->
 
-            <form class="form-horizontal" role="form">
+
+        @using (Html.BeginForm())
+        {
+            <form class="form-horizontal">
+                @Html.AntiForgeryToken()
+
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Förnamn:</label>
                     <div class="col-lg-8">
-                        <input class="form-control" type="text"placeholder="............">
+                        @Html.EditorFor(model => model.medlem.Förnamn, new { htmlAttributes = new { @type = "text", @class = "form-control" } })
+
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Efternamn:</label>
                     <div class="col-lg-8">
-                        <input class="form-control" type="text" placeholder="............">
+                        @Html.EditorFor(model => model.medlem.Efternamn, new { htmlAttributes = new { @type = "text", @class = "form-control" } })
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-lg-3 control-label">HV Email:</label>
                     <div class="col-lg-8">
-                        <input class="form-control" type="text" placeholder="ex: mikael.danielsson@hv.se">
+                        @Html.EditorFor(model => model.medlem.Epostadress, new { htmlAttributes = new { @type = "text", @class = "form-control" } })
                     </div>
                 </div>
 
-
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Telefonnummer:</label>
+                    <div class="col-lg-8">
+                        @Html.EditorFor(model => model.medlem.Telefonnummer, new { htmlAttributes = new { @type = "text", @class = "form-control" } })
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Institution:</label>
                     <div class="col-lg-8">
-                        <div class="ui-select">
 
-                            <select id="user_time_zone" class="form-control">
-                                <option value="Ekonomi & IT">Ekonomi & IT (EI)</option>
-                                <option value="Ingenjörsvetenskap">Ingenjörsvetenskap (IV)</option>
-                                <option value="Individ och samhälle">Individ och samhälle (IoS)</option>
-                                <option value="Institutionen för hälsovetenskap">Institutionen för hälsovetenskap (IH)</option>
-                                <option value="Förvaltning">Förvaltning (Forv)</option>
-                                <option value="Studentstöd och bibliotek">Studentstöd och bibliotek(SoB)</option>
-                                <option value="Rektor">Rektor (R)</option>
-                            </select>
-                        </div>
+                        @if (Model.Institutions.Count > 0)
+                        {
+
+                            @Html.DropDownListFor(m => m.Institutions,
+                                                Model.Institutions.Select(m => new SelectListItem
+                                                {
+                                                    Value = m.ToString(),
+                                                    Text = m.ToString()
+                                                }),
+                                                new { @class = "form-control" })
+                        }
+                        else
+                        {
+                            <div class="ui-select">
+
+                                <select id="user_time_zone" class="form-control">
+                                    <option value="Ingen data"></option>
+
+                                </select>
+                            </div>
+                        }
+
+                        @*<div class="ui-select">
+
+                                <select id="user_time_zone" class="form-control">
+                                    <option value="Ekonomi & IT">Ekonomi & IT (EI)</option>
+                                    <option value="Ingenjörsvetenskap">Ingenjörsvetenskap (IV)</option>
+                                    <option value="Individ och samhälle">Individ och samhälle (IoS)</option>
+                                    <option value="Institutionen för hälsovetenskap">Institutionen för hälsovetenskap (IH)</option>
+                                    <option value="Förvaltning">Förvaltning (Forv)</option>
+                                    <option value="Studentstöd och bibliotek">Studentstöd och bibliotek(SoB)</option>
+                                    <option value="Rektor">Rektor (R)</option>
+                                </select>
+                            </div>*@
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Giltig till:</label>
                     <div class="col-lg-8">
-                        @Html.DropDownList("Years", new SelectList(Model.years as System.Collections.IEnumerable, Model.years.ToString()), new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.years)
+
+                        @if (Model.years.Count > 0)
+                        {
+
+                            @Html.DropDownListFor(m => m.years,
+                                             Model.years.Select(m => new SelectListItem
+                                             {
+                                                 Value = m.ToString(),
+                                                 Text = m.Year.ToString()
+                                             }),
+                                             new { @class = "form-control" })
+
+                        }
+                        else
+                        {
+                            <div class="ui-select">
+
+                                <select id="user_time_zone" class="form-control">
+                                    <option value="Ingen data"></option>
+
+                                </select>
+                            </div>
+                        }
+
+
 
                     </div>
                 </div>
-                @*<div class="form-group">
-            <label class="col-md-3 control-label">Username:</label>
-            <div class="col-md-8">
-                <input class="form-control" type="text" value="janeuser">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-3 control-label">Password:</label>
-            <div class="col-md-8">
-                <input class="form-control" type="password" value="11111122333">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-3 control-label">Confirm password:</label>
-            <div class="col-md-8">
-                <input class="form-control" type="password" value="11111122333">
-            </div>
-        </div>*@
+                <br />
+                <br />
                 <div class="form-group">
                     <label class="col-md-3 control-label"></label>
                     <div class="col-md-8">
-                        <input type="button" class="btn btn-primary" value="Spara medlem">
+                        <input type="submit" class="btn btn-primary" value="Spara medlem">
                         <span></span>
                         <input type="reset" class="btn btn-default" value="Avbryt">
                     </div>
                 </div>
             </form>
-        </div>
+        }
     </div>
 </div>
 <hr>
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+}  
