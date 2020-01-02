@@ -40,10 +40,10 @@
 
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        @Html.ValidationMessageFor(model => model.medlem.Förnamn)
+                        
                         @Html.EditorFor(model => model.medlem.Förnamn, new { htmlAttributes = new { @type = "text", @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.medlem.Förnamn)
-
+                        
 
                     </div>
                 </div>
@@ -51,7 +51,8 @@
                     <label class="col-lg-3 control-label">Efternamn:</label>
                     <div class="col-lg-8">
                         @Html.EditorFor(model => model.medlem.Efternamn, new { htmlAttributes = new { @type = "text", @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.medlem.Efternamn)
+                            @Html.ValidationMessageFor(model => model.medlem.Efternamn)
+
 
                     </div>
                 </div>

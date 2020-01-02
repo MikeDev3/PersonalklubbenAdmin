@@ -22,8 +22,6 @@ namespace PersonalklubbenHVAdmin.Controllers
     {
         List<Medlem> memberList = new List<Medlem>();
 
-        CreateMemberViewmodel viewmodel = new CreateMemberViewmodel();
-
         // GET: Medlems
         public ActionResult MedlemsIndex()
         {
@@ -230,40 +228,9 @@ namespace PersonalklubbenHVAdmin.Controllers
         }
         public ActionResult CreateMember()
         {
-            //CreateMemberViewmodel data = new CreateMemberViewmodel();
+            CreateMemberViewmodel viewmodel = new CreateMemberViewmodel();
 
-            List<string> names = new List<string>();
-
-            names.Add("Ekonomi & IT (EI)");
-            names.Add("Ingenjörsvetenskap (IV)");
-            names.Add("Institutionen för hälsovetenskap (IH)");
-            names.Add("Individ och samhälle (IoS)");
-            names.Add("Förvaltning (Forv)");
-            names.Add("Studentstöd och bibliotek (SoB)");
-            names.Add("Rektor (R)");
-
-            viewmodel.Institutions = names;
-
-            //years.Add(new DateTime(DateTime.Now.Year, 12, 31));
-            //years.Add(new DateTime(DateTime.Now.Year + 1, 12, 31));
-            //years.Add(new DateTime(DateTime.Now.Year + 2, 12, 31));
-
-
-            //const int numberOfYears = 3;
-            //var startYear = DateTime.Now.Year;
-            //var endYear = startYear + numberOfYears;
-
-            //var yearList = new List<SelectListItem>();
-            //for (var i = startYear; i < endYear; i++)
-            //{
-            //    yearList.Add(new SelectListItem() { Value = i.ToString(), Text = i.ToString() });
-            //}
-            var list = new List<DateTime>();
-            list.Add(new DateTime(DateTime.Now.Year, 12, 31));
-            list.Add(new DateTime(DateTime.Now.Year + 1, 12, 31));
-            list.Add(new DateTime(DateTime.Now.Year + 2, 12, 31));
-
-            viewmodel.years = list;
+            viewmodel = createMemberViewmodel();
 
             try
             {
@@ -281,9 +248,14 @@ namespace PersonalklubbenHVAdmin.Controllers
         public async Task<ActionResult> CreateMember (CreateMemberViewmodel nyMedlem)
         {
 
-            if (ModelState.IsValid)
+
+            if (!ModelState.IsValid)
             {
-                return View();
+                CreateMemberViewmodel viewmodel = new CreateMemberViewmodel();
+
+                viewmodel = createMemberViewmodel();
+
+                return View(new CreateMemberViewmodel { Institutions = viewmodel.Institutions, years = viewmodel.years });
             }
 
             Medlem newMember = new Medlem();
@@ -331,32 +303,15 @@ namespace PersonalklubbenHVAdmin.Controllers
                     else
                     {
 
-                        //CreateMemberViewmodel viewmodel = new CreateMemberViewmodel();
+                        CreateMemberViewmodel viewmodel = new CreateMemberViewmodel();
 
-                        //List<string> names = new List<string>();
-
-                        //names.Add("Ekonomi & IT (EI)");
-                        //names.Add("Ingenjörsvetenskap (IV)");
-                        //names.Add("Institutionen för hälsovetenskap (IH)");
-                        //names.Add("Individ och samhälle (IoS)");
-                        //names.Add("Förvaltning (Forv)");
-                        //names.Add("Studentstöd och bibliotek (SoB)");
-                        //names.Add("Rektor (R)");
-
-                        //viewmodel.Institutions = names;
-
-                        //var list = new List<DateTime>();
-                        //list.Add(new DateTime(DateTime.Now.Year, 12, 31));
-                        //list.Add(new DateTime(DateTime.Now.Year + 1, 12, 31));
-                        //list.Add(new DateTime(DateTime.Now.Year + 2, 12, 31));
-
-                        //viewmodel.years = list;
+                        viewmodel = createMemberViewmodel();
 
                         try
                         {
                             ModelState.AddModelError("Felmeddelande", "Allt fylldes inte i korrekt");
 
-                            return View(viewmodel);
+                            return View(new CreateMemberViewmodel { Institutions = viewmodel.Institutions, years = viewmodel.years });
 
                         }
                         catch (Exception ex)
@@ -408,6 +363,31 @@ namespace PersonalklubbenHVAdmin.Controllers
                 return View("Error", new HandleErrorInfo(ex, "Medlems", "DeleteMember"));
 
             }
+        }
+        public CreateMemberViewmodel createMemberViewmodel()
+        {
+            CreateMemberViewmodel viewmodel = new CreateMemberViewmodel();
+
+            List<string> names = new List<string>();
+
+            names.Add("Ekonomi & IT (EI)");
+            names.Add("Ingenjörsvetenskap (IV)");
+            names.Add("Institutionen för hälsovetenskap (IH)");
+            names.Add("Individ och samhälle (IoS)");
+            names.Add("Förvaltning (Forv)");
+            names.Add("Studentstöd och bibliotek (SoB)");
+            names.Add("Rektor (R)");
+
+            viewmodel.Institutions = names;
+
+            var list = new List<DateTime>();
+            list.Add(new DateTime(DateTime.Now.Year, 12, 31));
+            list.Add(new DateTime(DateTime.Now.Year + 1, 12, 31));
+            list.Add(new DateTime(DateTime.Now.Year + 2, 12, 31));
+
+            viewmodel.years = list;
+
+            return viewmodel;
         }
 
     }
