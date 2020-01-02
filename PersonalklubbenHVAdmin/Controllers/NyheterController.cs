@@ -38,13 +38,22 @@ namespace PersonalklubbenHVAdmin.Controllers
             {
                 //ToDo Give errormessage to user and possibly log error
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
-                return View();
+                return View("Error", new HandleErrorInfo(ex, "Nyheter", "NyheterIndex"));
             }
 
         }
         public ActionResult CreateNews()
         {
-            return View();
+            try
+            {
+                return View();
+
+            }
+            catch (Exception ex)
+            {
+
+                return View("Error", new HandleErrorInfo(ex, "Nyheter", "CreateNews"));
+            }
         }
 
         [HttpPost]
@@ -77,13 +86,13 @@ namespace PersonalklubbenHVAdmin.Controllers
                     }
 
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
 
                     ModelState.AddModelError("Felmeddelande", "Denna användare kan inte hittas.");
-                    return RedirectToAction("NewRegistrations");
-                }
-            
+                return View("Error", new HandleErrorInfo(ex, "Nyheter", "CreateNews"));
+            }
+
         }
 
         public ActionResult DeleteNewsPost(int id)
@@ -115,7 +124,7 @@ namespace PersonalklubbenHVAdmin.Controllers
             {
                 //ToDo Give errormessage to user and possibly log error
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
-                return RedirectToAction("NyheterIndex");
+                return View("Error", new HandleErrorInfo(ex, "Nyheter", "NyheterIndex"));
 
             }
         }

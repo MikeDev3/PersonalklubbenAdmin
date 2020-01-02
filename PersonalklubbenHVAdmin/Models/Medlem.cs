@@ -16,24 +16,24 @@ namespace PersonalklubbenHVAdmin.Models
 
         public int ID { get; set; }
 
-        [Required(ErrorMessage = "Please enter name")]
+        [Required(ErrorMessage = "Ange ett giltigt förnamn")]
         //[RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$",
         // ErrorMessage = "Characters are not allowed.")]
         public string Förnamn { get; set; }
 
-        [Required]
         [StringLength(40)]
+        [Required(ErrorMessage = "Ange ett giltigt efternamn")]
         public string Efternamn { get; set; }
-        [Required]
-        [StringLength(25)]
+
+        [Required(ErrorMessage = "Telefonnummer får vara mellan 8 till 12 siffror")]
+        [StringLength(12, MinimumLength =8, ErrorMessage = "Ej giltig")]
         public string Telefonnummer { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string Institution { get; set; }
 
-        [Required]
-        [StringLength(60)]
+        [Required(ErrorMessage = "Ange giltigt e-postadress")]
+        [StringLength(40, MinimumLength =10, ErrorMessage = "Ej giltig")]
         public string Epostadress { get; set; }
 
         [Column(TypeName = "date")]

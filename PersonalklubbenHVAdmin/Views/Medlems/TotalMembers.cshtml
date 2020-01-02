@@ -37,7 +37,7 @@
                     <td>@(item.GiltighetsÅr.ToString("yyyy/MM/dd"))</td>
 
 
-                    <td>@Html.ActionLink("Radera", "Delete", new { id = item.ID })</td>
+                    <td>@Html.ActionLink("Radera", "DeleteMember", new { id = item.ID })</td>
 
                     @if (item.GiltighetsÅr.Year < DateTime.Now.Year)
                     {

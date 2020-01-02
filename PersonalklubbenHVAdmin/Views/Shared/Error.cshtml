@@ -1,13 +1,21 @@
-﻿<!DOCTYPE html>
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Error</title>
 </head>
 <body>
-    <hgroup>
-        <h1>Error.</h1>
-        <h2>An error occurred while processing your request.</h2>
-    </hgroup>
+
+    <h1 class="text-danger">Error. @Model.Exception.Message</h1> <br />
+
+    <h2 class="text-danger">Något gick fel, gå tillbaks och försök igen</h2>
+    <h4 class="text-danger">Om du ej kan gå tillbaks, gå till startsidan</h4>
+
+
+    @Html.ActionLink("Gå tillbaks", @Model.ActionName, @Model.ControllerName)
+
+
 </body>
 </html>

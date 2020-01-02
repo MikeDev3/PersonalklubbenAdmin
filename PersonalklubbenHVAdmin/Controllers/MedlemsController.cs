@@ -4,8 +4,10 @@ using PersonalklubbenHVAdmin.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -19,8 +21,8 @@ namespace PersonalklubbenHVAdmin.Controllers
     public class MedlemsController : Controller
     {
         List<Medlem> memberList = new List<Medlem>();
-        CreateMemberViewmodel data = new CreateMemberViewmodel();
 
+        CreateMemberViewmodel viewmodel = new CreateMemberViewmodel();
 
         // GET: Medlems
         public ActionResult MedlemsIndex()
@@ -45,7 +47,7 @@ namespace PersonalklubbenHVAdmin.Controllers
             {
                 //ToDo Give errormessage to user and possibly log error
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
-                return View();
+                return View("Error", new HandleErrorInfo(ex, "Medlems", "MedlemsIndex"));
             }
         }
         public ActionResult NewRegistrations()
@@ -71,7 +73,7 @@ namespace PersonalklubbenHVAdmin.Controllers
             {
                 //ToDo Give errormessage to user and possibly log error
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
-                return View();
+                return View("Error", new HandleErrorInfo(ex, "Medlems", "ShowProfile"));
             }
         }
         public ActionResult TotalMembers()
@@ -86,7 +88,7 @@ namespace PersonalklubbenHVAdmin.Controllers
             {
                 //ToDo Give errormessage to user and possibly log error
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
-                return View();
+                return View("Error", new HandleErrorInfo(ex, "Medlems", "TotalMembers"));
             }
         }
 
@@ -228,7 +230,7 @@ namespace PersonalklubbenHVAdmin.Controllers
         }
         public ActionResult CreateMember()
         {
-            CreateMemberViewmodel data = new CreateMemberViewmodel();
+            //CreateMemberViewmodel data = new CreateMemberViewmodel();
 
             List<string> names = new List<string>();
 
@@ -240,7 +242,7 @@ namespace PersonalklubbenHVAdmin.Controllers
             names.Add("Studentstöd och bibliotek (SoB)");
             names.Add("Rektor (R)");
 
-            data.Institutions = names;
+            viewmodel.Institutions = names;
 
             //years.Add(new DateTime(DateTime.Now.Year, 12, 31));
             //years.Add(new DateTime(DateTime.Now.Year + 1, 12, 31));
@@ -261,45 +263,23 @@ namespace PersonalklubbenHVAdmin.Controllers
             list.Add(new DateTime(DateTime.Now.Year + 1, 12, 31));
             list.Add(new DateTime(DateTime.Now.Year + 2, 12, 31));
 
-            data.years = list;
+            viewmodel.years = list;
 
-           
-            return View(data);
+            try
+            {
+
+                return View(viewmodel);
+
+            }
+            catch (Exception ex)
+            {
+
+                return View("Error", new HandleErrorInfo(ex, "Medlems", "CreateMember"));
+            }
         }
         [HttpPost]
         public async Task<ActionResult> CreateMember (CreateMemberViewmodel nyMedlem)
         {
-
-            //string emailPattern = @"^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"; // Email address pattern  
-            //string zipCodePattern = @"^\d{3}\s?\d{3}$";
-            //string phonePattern = @"^[2-9]\d{2}-\d{3}-\d{4}$"; // US Phone number pattern   
-
-            //// Create a bool variable and use the Regex.IsMatch static method which returns true if a specific value matches a specific pattern  
-            //bool isEmailValid = Regex.IsMatch(nyMedlem.medlem.Epostadress, emailPattern);
-            ////bool isZipValid = Regex.IsMatch(txtZipCode.Text, zipCodePattern);
-            ////bool isPhoneValid = Regex.IsMatch(txtPhone.Text, phonePattern);
-
-            //// Now you can check the result   
-            //if (!isEmailValid)
-            //{
-            //    ViewBag.Message = "Email är i fel format";
-            //}
-            //if (nyMedlem.medlem.Epostadress != "Hej")
-            //{
-            //    ViewBag.Message = "The following errors have occurred ";
-
-
-            //}
-
-            //if (!isZipValid)
-            //{
-            //    MessageBox.Show("Please enter a valid zip code");
-            //}
-
-            //if (!isPhoneValid)
-            //{
-            //    MessageBox.Show("Please enter a valid phone number");
-            //}
 
             if (ModelState.IsValid)
             {
@@ -344,24 +324,55 @@ namespace PersonalklubbenHVAdmin.Controllers
                     {
                         ModelState.AddModelError("Felmeddelande", "Användare tillagd!");
                         ViewBag.Message = String.Format("Ny medlem tillagd!\n Registrerades den{0}.",  DateTime.Now.ToString());
+
                         return RedirectToAction("MedlemsIndex");
+
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, "Student Name already exists.");
-                        ViewBag.Message = "Något gick fel";
 
-                        return RedirectToAction("CreateMember");
+                        //CreateMemberViewmodel viewmodel = new CreateMemberViewmodel();
+
+                        //List<string> names = new List<string>();
+
+                        //names.Add("Ekonomi & IT (EI)");
+                        //names.Add("Ingenjörsvetenskap (IV)");
+                        //names.Add("Institutionen för hälsovetenskap (IH)");
+                        //names.Add("Individ och samhälle (IoS)");
+                        //names.Add("Förvaltning (Forv)");
+                        //names.Add("Studentstöd och bibliotek (SoB)");
+                        //names.Add("Rektor (R)");
+
+                        //viewmodel.Institutions = names;
+
+                        //var list = new List<DateTime>();
+                        //list.Add(new DateTime(DateTime.Now.Year, 12, 31));
+                        //list.Add(new DateTime(DateTime.Now.Year + 1, 12, 31));
+                        //list.Add(new DateTime(DateTime.Now.Year + 2, 12, 31));
+
+                        //viewmodel.years = list;
+
+                        try
+                        {
+                            ModelState.AddModelError("Felmeddelande", "Allt fylldes inte i korrekt");
+
+                            return View(viewmodel);
+
+                        }
+                        catch (Exception ex)
+                        {
+
+                            return View("Error", new HandleErrorInfo(ex, "Medlems", "CreateMember"));
+                        }
                        
                     }
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                ModelState.AddModelError("Felmeddelande", "Denna användare kan inte hittas.");
-                return RedirectToAction("MedlemsIndex");
+                return View("Error", new HandleErrorInfo(ex, "Medlems", "CreateMember"));
             }
 
         }
@@ -394,9 +405,10 @@ namespace PersonalklubbenHVAdmin.Controllers
             {
                 //ToDo Give errormessage to user and possibly log error
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
-                return RedirectToAction("MedlemsIndex");
+                return View("Error", new HandleErrorInfo(ex, "Medlems", "DeleteMember"));
 
             }
         }
+
     }
 }

@@ -66,7 +66,7 @@ namespace Loinprojekt_admin.Controllers
             {
                 //ToDo Give errormessage to user and possibly log error
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
-                return View();
+                return View("Error", new HandleErrorInfo(ex, "Home", "Index"));
             }
 
 

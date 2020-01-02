@@ -132,6 +132,7 @@
     </Compile>
     <Compile Include="Models\Admins.cs" />
     <Compile Include="Models\Appliances.cs" />
+    <Compile Include="Models\Gmail.cs" />
     <Compile Include="Models\Medlem.cs" />
     <Compile Include="Models\Medlemskonto.cs" />
     <Compile Include="Models\Nyheter.cs" />
