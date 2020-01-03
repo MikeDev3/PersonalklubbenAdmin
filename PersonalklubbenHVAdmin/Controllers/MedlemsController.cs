@@ -331,6 +331,119 @@ namespace PersonalklubbenHVAdmin.Controllers
             }
 
         }
+        public ActionResult UpdateMembership(int id)
+        {
+            CreateMemberViewmodel viewmodel = new CreateMemberViewmodel();
+
+            viewmodel = createMemberViewmodel();
+
+            try
+            {
+                memberList = ShowMembers();
+                Medlem medlem = new Medlem();
+                medlem = getMemberByID(id);
+                viewmodel.medlem = medlem;
+                return View(viewmodel);
+
+            }
+            catch (Exception ex)
+            {
+                //ToDo Give errormessage to user and possibly log error
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+                return View("Error", new HandleErrorInfo(ex, "Medlems", "ShowProfile"));
+            }
+        }
+        [HttpPost]
+        public async Task<ActionResult> UpdateMembership(CreateMemberViewmodel updatedMember)
+        {
+            foreach (var item in updatedMember.Institutions)
+            {
+                updatedMember.medlem.Institution = item;
+            }
+            foreach (var item in updatedMember.years)
+            {
+                updatedMember.medlem.GiltighetsÅr = item;
+            }
+
+           
+            if (!ModelState.IsValid)
+            {
+                CreateMemberViewmodel viewmodel = new CreateMemberViewmodel();
+
+                viewmodel = createMemberViewmodel();
+
+                memberList = ShowMembers();
+                Medlem medlem = new Medlem();
+                medlem = getMemberByID(updatedMember.medlem.ID);
+                viewmodel.medlem = medlem;
+
+                return View(new CreateMemberViewmodel { Institutions = viewmodel.Institutions, years = viewmodel.years, medlem = medlem });
+            }
+
+            Medlem newMember = new Medlem();
+            newMember.ID = updatedMember.medlem.ID;
+            newMember.Förnamn = updatedMember.medlem.Förnamn;
+            newMember.Efternamn = updatedMember.medlem.Efternamn;
+            newMember.Epostadress = updatedMember.medlem.Epostadress;
+            newMember.Telefonnummer = updatedMember.medlem.Telefonnummer;
+            newMember.RegistreringsDatum = updatedMember.medlem.RegistreringsDatum;
+            newMember.Institution = updatedMember.medlem.Institution;
+            newMember.GiltighetsÅr = updatedMember.medlem.GiltighetsÅr;
+
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri("http://193.10.202.76/");
+
+                    var myContent = JsonConvert.SerializeObject(newMember);
+                    var buffer = Encoding.UTF8.GetBytes(myContent);
+                    var byteContent = new ByteArrayContent(buffer);
+                    byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                    var result = client.PostAsync("PhersonalklubbenREST/api/UppdateraMedlemsskap", byteContent).Result;
+                    string data = await result.Content.ReadAsStringAsync();
+                    if (result.IsSuccessStatusCode)
+                    {
+                        ModelState.AddModelError("Felmeddelande", "Användare tillagd!");
+                        return RedirectToAction("MedlemsIndex");
+
+                    }
+                    else
+                    {
+
+                        CreateMemberViewmodel viewmodel = new CreateMemberViewmodel();
+
+                        viewmodel = createMemberViewmodel();
+
+                        try
+                        {
+                            ModelState.AddModelError("Felmeddelande", "Medlemsskapet kunde ej förnyas, var god försök igen senare");
+
+                            memberList = ShowMembers();
+                            Medlem medlem = new Medlem();
+                            medlem = getMemberByID(updatedMember.medlem.ID);
+                            viewmodel.medlem = medlem;
+
+                            return View(new CreateMemberViewmodel { Institutions = viewmodel.Institutions, years = viewmodel.years, medlem = medlem });
+                        }
+                        catch (Exception ex)
+                        {
+
+                            return View("Error", new HandleErrorInfo(ex, "Medlems", "TotalMembers"));
+                        }
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                return View("Error", new HandleErrorInfo(ex, "Medlems", "TotalMembers"));
+            }
+        }
+
         public ActionResult DeleteMember(int id)
         {
             try
@@ -389,6 +502,22 @@ namespace PersonalklubbenHVAdmin.Controllers
 
             return viewmodel;
         }
+        public Medlem getMemberByID (int id)
+        {
+            memberList = ShowMembers();
+            Medlem medlem = new Medlem();
+            medlem = (from x in memberList
+                      where x.ID == id
+                      select x).FirstOrDefault();
+
+            medlem.Förnamn = string.Concat(medlem.Förnamn.Where(c => !char.IsWhiteSpace(c)));
+            medlem.Efternamn = string.Concat(medlem.Efternamn.Where(c => !char.IsWhiteSpace(c)));
+            medlem.Telefonnummer = string.Concat(medlem.Telefonnummer.Where(c => !char.IsWhiteSpace(c)));
+            medlem.Epostadress = string.Concat(medlem.Epostadress.Where(c => !char.IsWhiteSpace(c)));
+
+            return medlem;
+        }
 
     }
+    
 }
