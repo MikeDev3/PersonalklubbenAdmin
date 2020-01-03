@@ -24,5 +24,11 @@ namespace PersonalklubbenHVAdmin.Models
 
         [Column(TypeName = "date")]
         public DateTime PubliceringsDatum { get; set; }
+        [StringLength(200)]
+        public string BildURL { get; set; }
+        [StringLength(200)]
+        public string Link1 { get; set; }
+        [StringLength(200)]
+        public string Link2 { get; set; }
     }
 }

@@ -151,7 +151,7 @@
                 <div class="form-group">
                     <label class="col-md-3 control-label"></label>
                     <div class="col-md-8">
-                        <input type="submit" class="btn btn-primary" value="Spara medlem">
+                        <input type="submit" class="btn btn-primary" value="Spara medlem" onclick="return confirm('Är du säker på att du vill lägga till denna medlem?');">
                         <span></span>
                         <input type="reset" class="btn btn-default" value="Avbryt">
                         @Html.ValidationSummary(false, "", new { @class = "text-danger" })
