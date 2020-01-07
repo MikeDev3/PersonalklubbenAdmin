@@ -158,6 +158,7 @@
     <Content Include="Images\LoginImage.png" />
     <Content Include="Images\MessageIcon.png" />
     <Content Include="Images\PhersonalklubbenIkon.png.jpg" />
+    <Content Include="Images\woods-walk.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
@@ -196,6 +197,7 @@
     <Content Include="Views\Nyheter\EditNews.cshtml" />
     <Content Include="Views\Medlems\CreateMember.cshtml" />
     <Content Include="Views\Medlems\UpdateMembership.cshtml" />
+    <Content Include="Views\Nyheter\NewsDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

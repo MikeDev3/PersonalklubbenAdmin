@@ -55,6 +55,40 @@ namespace PersonalklubbenHVAdmin.Controllers
             }
 
         }
+        public ActionResult NewsDetails (int id)
+        {
+            sessionObjekt = (Admins)Session["admin"];
+
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("LoginIndex", "Login");
+            }
+            else
+            {
+                ViewBag.Username = "Inloggad som: " + sessionObjekt.Förnamn;
+
+            }
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri("http://193.10.202.76/");
+                    MediaTypeWithQualityHeaderValue contentType = new MediaTypeWithQualityHeaderValue("application/json");
+                    client.DefaultRequestHeaders.Accept.Add(contentType);
+                    HttpResponseMessage response = client.GetAsync("/PhersonalklubbenREST/api/Nyheters/" + id).Result;
+                    string stringData = response.Content.ReadAsStringAsync().Result;
+                    Nyheter data = JsonConvert.DeserializeObject<Nyheter>(stringData);
+                    return View(data);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                //ToDo Give errormessage to user and possibly log error
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+                return View("Error", new HandleErrorInfo(ex, "Nyheter", "NyheterIndex"));
+            }
+        }
         public ActionResult CreateNews()
         {
             sessionObjekt = (Admins)Session["admin"];

@@ -156,11 +156,22 @@ input[type=button], input[type=submit], input[type=reset] {
         color: white;
         text-decoration: none;
     }
-}
+
 
 .logoutbtn:hover {
     background-color: green;
     color: black;
+}
+.counter {
+    background-color: grey;
+    width: 120px;
+    height: 120px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: white;
+    opacity: 0.8;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    margin-left: 80%;
+    padding: 10px;
 }
 
 .positionright {

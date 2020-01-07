@@ -53,6 +53,10 @@ namespace PersonalklubbenHVAdmin.Controllers
                         }
                     
                 }
+
+                int amount = activeMembers.Count();
+                ViewBag.TotalMembers = amount;
+
                 return View(activeMembers);
 
             }
@@ -106,6 +110,8 @@ namespace PersonalklubbenHVAdmin.Controllers
             try
             {
                 memberList = ShowMembers();
+                int amount = memberList.Count();
+                ViewBag.TotalMembers = amount;
                 return View(memberList);
 
             }
