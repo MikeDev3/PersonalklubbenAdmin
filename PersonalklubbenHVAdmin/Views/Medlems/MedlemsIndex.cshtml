@@ -31,8 +31,7 @@
                     <th class="th" style="text-decoration-line:underline; cursor: pointer" onclick="sortInstitution()">Institution</th>
                     <th class="th" style="text-decoration-line:underline; cursor: pointer" onclick="sortDate()">Medlem sedan</th>
                     <th class="th" style="text-decoration-line:underline; cursor: pointer" onclick="sortValidDate()">Giltig till</th>
-                    <th class="th">Radera konto</th>
-                    <th class="th">Blockera</th>
+                    <th class="th">Radera</th>
 
                 </tr>
 
@@ -50,7 +49,6 @@
                         <td>
                             <a href="@Url.Action("DeleteMember", "Medlems", new { id = item.ID })" onclick="return confirm('Är du säker på att du vill radera denna medlem?');" class="blockBtn logoutBtnColor btn"><span class="glyphicon glyphicon-trash"></span> Radera</a>
                         </td>
-                        <td>@Html.ActionLink("Blockera", "BlockUser", new { id = item.ID })</td>
 
                     </tr>
                 }

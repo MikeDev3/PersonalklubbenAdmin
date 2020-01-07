@@ -108,9 +108,11 @@ input[type=button], input[type=submit], input[type=reset] {
 }
 
 .menuBarItem {
-    font-size: 15px;
-    margin-top: 100%;
+    font-size: 18px;
+    margin-top: 50%;
     margin-left: -40%;
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
 }
 
 .createNewPostButton {
@@ -140,6 +142,9 @@ input[type=button], input[type=submit], input[type=reset] {
     transition: 0.3s;
     display: inline-block;
     cursor: pointer;
+}
+.logoutbtn:hover {
+    background-color: darkgreen;
 }
 
 
