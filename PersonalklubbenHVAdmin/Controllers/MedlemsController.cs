@@ -21,10 +21,25 @@ namespace PersonalklubbenHVAdmin.Controllers
     public class MedlemsController : Controller
     {
         List<Medlem> memberList = new List<Medlem>();
+        Admins sessionObjekt = new Admins();
+
+
 
         // GET: Medlems
         public ActionResult MedlemsIndex()
         {
+            sessionObjekt = (Admins)Session["admin"];
+
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("LoginIndex", "Login");
+            }
+            else
+            {
+                ViewBag.Username = "Inloggad som: " + sessionObjekt.Förnamn;
+
+            }
+
             try
             {
                 memberList = ShowMembers();
@@ -76,6 +91,18 @@ namespace PersonalklubbenHVAdmin.Controllers
         }
         public ActionResult TotalMembers()
         {
+            sessionObjekt = (Admins)Session["admin"];
+
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("LoginIndex", "Login");
+            }
+            else
+            {
+                ViewBag.Username = "Inloggad som: " + sessionObjekt.Förnamn;
+
+            }
+
             try
             {
                 memberList = ShowMembers();
@@ -152,6 +179,7 @@ namespace PersonalklubbenHVAdmin.Controllers
 
         public List<Medlem> ShowMembers()
         {
+           
             try
             {
                 using (HttpClient client = new HttpClient())
@@ -228,6 +256,17 @@ namespace PersonalklubbenHVAdmin.Controllers
         }
         public ActionResult CreateMember()
         {
+            sessionObjekt = (Admins)Session["admin"];
+
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("LoginIndex", "Login");
+            }
+            else
+            {
+                ViewBag.Username = "Inloggad som: " + sessionObjekt.Förnamn;
+
+            }
             CreateMemberViewmodel viewmodel = new CreateMemberViewmodel();
 
             viewmodel = createMemberViewmodel();
@@ -247,6 +286,17 @@ namespace PersonalklubbenHVAdmin.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateMember (CreateMemberViewmodel nyMedlem)
         {
+            sessionObjekt = (Admins)Session["admin"];
+
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("LoginIndex", "Login");
+            }
+            else
+            {
+                ViewBag.Username = "Inloggad som: " + sessionObjekt.Förnamn;
+
+            }
 
 
             if (!ModelState.IsValid)
@@ -333,6 +383,17 @@ namespace PersonalklubbenHVAdmin.Controllers
         }
         public ActionResult UpdateMembership(int id)
         {
+            sessionObjekt = (Admins)Session["admin"];
+
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("LoginIndex", "Login");
+            }
+            else
+            {
+                ViewBag.Username = "Inloggad som: " + sessionObjekt.Förnamn;
+
+            }
             CreateMemberViewmodel viewmodel = new CreateMemberViewmodel();
 
             viewmodel = createMemberViewmodel();
@@ -356,6 +417,17 @@ namespace PersonalklubbenHVAdmin.Controllers
         [HttpPost]
         public async Task<ActionResult> UpdateMembership(CreateMemberViewmodel updatedMember)
         {
+            sessionObjekt = (Admins)Session["admin"];
+
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("LoginIndex", "Login");
+            }
+            else
+            {
+                ViewBag.Username = "Inloggad som: " + sessionObjekt.Förnamn;
+
+            }
             foreach (var item in updatedMember.Institutions)
             {
                 updatedMember.medlem.Institution = item;
@@ -446,6 +518,17 @@ namespace PersonalklubbenHVAdmin.Controllers
 
         public ActionResult DeleteMember(int id)
         {
+            sessionObjekt = (Admins)Session["admin"];
+
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("LoginIndex", "Login");
+            }
+            else
+            {
+                ViewBag.Username = "Inloggad som: " + sessionObjekt.Förnamn;
+
+            }
             try
             {
                 using (HttpClient client = new HttpClient())

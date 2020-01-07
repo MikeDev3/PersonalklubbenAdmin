@@ -14,19 +14,20 @@ namespace Loinprojekt_admin.Controllers
 
     public class HomeController : Controller
     {
+        Admins sessionObjekt = new Admins();
         public ActionResult Index()
         {
-            //Admins sessionObjekt = (Admins)Session["admin"];
+            sessionObjekt = (Admins)Session["admin"];
 
-            //if (Session["admin"] == null)
-            //{
-            //    return RedirectToAction("LoginIndex", "Login");
-            //}
-            //else
-            //{
-            //    ViewBag.Username = "Inloggad som: " + sessionObjekt.Förnamn;
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("LoginIndex", "Login");
+            }
+            else
+            {
+                ViewBag.Username = "Inloggad som: " + sessionObjekt.Förnamn;
 
-            //}
+            }
 
             int activeRow = 0;
             int newRegistrations = 0;

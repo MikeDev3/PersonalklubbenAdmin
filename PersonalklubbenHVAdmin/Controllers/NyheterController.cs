@@ -18,8 +18,21 @@ namespace PersonalklubbenHVAdmin.Controllers
     public class NyheterController : Controller
     {
         // GET: Nyheter
+        Admins sessionObjekt = new Admins();
+
         public ActionResult NyheterIndex()
         {
+           sessionObjekt = (Admins)Session["admin"];
+
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("LoginIndex", "Login");
+            }
+            else
+            {
+                ViewBag.Username = "Inloggad som: " + sessionObjekt.Förnamn;
+
+            }
             try
             {
                 using (HttpClient client = new HttpClient())
@@ -44,6 +57,17 @@ namespace PersonalklubbenHVAdmin.Controllers
         }
         public ActionResult CreateNews()
         {
+            sessionObjekt = (Admins)Session["admin"];
+
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("LoginIndex", "Login");
+            }
+            else
+            {
+                ViewBag.Username = "Inloggad som: " + sessionObjekt.Förnamn;
+
+            }
             try
             {
                 return View();
@@ -59,7 +83,18 @@ namespace PersonalklubbenHVAdmin.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateNews(Nyheter nyhet)
         {
-               try
+            sessionObjekt = (Admins)Session["admin"];
+
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("LoginIndex", "Login");
+            }
+            else
+            {
+                ViewBag.Username = "Inloggad som: " + sessionObjekt.Förnamn;
+
+            }
+            try
                 {
                      nyhet.PubliceringsDatum = DateTime.Now;
                     using (HttpClient client = new HttpClient())
@@ -97,6 +132,15 @@ namespace PersonalklubbenHVAdmin.Controllers
 
         public ActionResult DeleteNewsPost(int id)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("LoginIndex", "Login");
+            }
+            else
+            {
+                ViewBag.Username = "Inloggad som: " + sessionObjekt.Förnamn;
+
+            }
             try
             {
                 using (HttpClient client = new HttpClient())
@@ -131,6 +175,15 @@ namespace PersonalklubbenHVAdmin.Controllers
 
         public ActionResult EditNews(int id)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("LoginIndex", "Login");
+            }
+            else
+            {
+                ViewBag.Username = "Inloggad som: " + sessionObjekt.Förnamn;
+
+            }
             Nyheter nyheter = new Nyheter();
             nyheter = GetNewsById(id);
 
@@ -139,6 +192,15 @@ namespace PersonalklubbenHVAdmin.Controllers
         [HttpPost]
         public async Task<ActionResult> EditNews(Nyheter updatedNews)
         {
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("LoginIndex", "Login");
+            }
+            else
+            {
+                ViewBag.Username = "Inloggad som: " + sessionObjekt.Förnamn;
+
+            }
             try
             {
                 using (HttpClient client = new HttpClient())

@@ -14,6 +14,7 @@ namespace PersonalklubbenHVAdmin.Controllers
 {
     public class LoginController : Controller
     {
+        Admins returnedAdmin = new Admins();
         // GET: Login
         public ActionResult LoginIndex()
         {
@@ -35,20 +36,17 @@ namespace PersonalklubbenHVAdmin.Controllers
                 var result = client.PostAsync("api/AdminLogin", byteContent).Result;
 
                 string data = await result.Content.ReadAsStringAsync();
+
+                returnedAdmin = JsonConvert.DeserializeObject<Admins>(data);
+
                 Session["Username"] = "Admin - " + data;
 
-                if (result.IsSuccessStatusCode)
+                if (result.IsSuccessStatusCode && returnedAdmin != null)
                 {
-                    Admins session = new Admins();
-                    session = GetAdminObject();
-                    if (session != null)
-                    {
-                        Session["admin"] = session;
-
-                    }
-
-                    System.Web.Security.FormsAuthentication.RedirectFromLoginPage(admin.Epostadress, false);
-                    return RedirectToAction("Index", "Home");
+                   
+                        Session["admin"] = returnedAdmin;
+                        System.Web.Security.FormsAuthentication.RedirectFromLoginPage(admin.Epostadress, false);
+                        return RedirectToAction("Index", "Home");
 
                 }
                 else
