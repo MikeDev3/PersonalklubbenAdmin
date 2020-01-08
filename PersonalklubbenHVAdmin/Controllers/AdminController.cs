@@ -39,7 +39,6 @@ namespace PersonalklubbenHVAdmin.Controllers
                     string stringData = response.Content.ReadAsStringAsync().Result;
                     List<Admins> data = JsonConvert.DeserializeObject<List<Admins>>(stringData);
                     return data;
-                    //Get this
                 }
 
             }
