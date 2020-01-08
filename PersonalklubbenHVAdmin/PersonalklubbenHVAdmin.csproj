@@ -123,6 +123,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MedlemsController.cs" />
@@ -198,6 +200,8 @@
     <Content Include="Views\Medlems\CreateMember.cshtml" />
     <Content Include="Views\Medlems\UpdateMembership.cshtml" />
     <Content Include="Views\Nyheter\NewsDetails.cshtml" />
+    <Content Include="Views\Email\SendMail.cshtml" />
+    <Content Include="Views\Admin\AdminList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
