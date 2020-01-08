@@ -7,7 +7,7 @@
 <div class="alert alert-info alert-dismissable">
     <a class="panel-close close" data-dismiss="alert">×</a>
     <i class="fa fa-coffee"></i>
-    <strong>Viktigt!</strong> Endast medlemmar år @DateTime.Now.Year visas. Klicka <strong> @Html.ActionLink("Här", "TotalMembers", "Medlems") </strong> för att se alla medlemmar.
+    <strong>Viktigt!</strong>  <strong> Aktiviteten loggas på servern </strong> 
 </div>
 
 <div class="input-group">
@@ -19,8 +19,9 @@
 
 
 <h2 style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">
-    Lista över aktiva användare             <a href="@Url.Action("CreateMember", "Medlems")" class="createNewPostButton logoutBtnColor btn"><span class="glyphicon glyphicon-cog"></span> Lägg till ny medlem</a>
-    Antal medlemmar: <strong>@ViewBag.TotalMembers</strong>
+    Administratörer           <a href="@Url.Action("CreateMember", "Medlems")" class="createNewPostButton logoutBtnColor btn" style="margin-right: 70px;" ><span class="glyphicon glyphicon-cog"></span> Lägg till ny administratör</a>
+
+    Antal administratörer: <strong>@ViewBag.TotalMembers</strong>
 
 </h2>
 
@@ -45,12 +46,12 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td style="font-weight: bold; font-style:italic; text-align:left">@Html.ActionLink((string)item.Epostadress, "ShowProfile", new { id = item.ID })</td>
+                    <td style="font-weight: bold; font-style:italic; text-align:left">@Html.ActionLink((string)item.Epostadress, "ShowAdminProfile", new { id = item.ID })</td>
                     <td>@Html.DisplayFor(m => item.Förnamn)</td>
                     <td>
                         @Html.DisplayFor(m => item.Efternamn)
                     </td>
-                    <td></td>
+                    <td> </td>
 
 
                     @*<td>@Html.ActionLink("Radera", "Delete", new { id = item.ID })</td>*@

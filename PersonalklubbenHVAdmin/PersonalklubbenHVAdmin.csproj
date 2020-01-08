@@ -202,6 +202,8 @@
     <Content Include="Views\Nyheter\NewsDetails.cshtml" />
     <Content Include="Views\Email\SendMail.cshtml" />
     <Content Include="Views\Admin\AdminList.cshtml" />
+    <Content Include="Views\Admin\ShowAdminProfile.cshtml" />
+    <Content Include="Views\Admin\CreateAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

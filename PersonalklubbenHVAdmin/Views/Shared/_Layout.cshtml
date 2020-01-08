@@ -78,13 +78,23 @@
                 </li>
                 <li style="padding-left: 100px" class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Administratörer <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
+                    <ul style="margin-left: 100px" class="dropdown-menu">
                         <li>@Html.ActionLink("Administratörer ", "AdminList", "Admin")</li>
+                        <li>@Html.ActionLink("Lägg till administratör", "CreateAdmin", "Admin")</li>
+
                         @*<li>@Html.ActionLink("Lägg till administratör ", "MedlemsIndex", "Medlems")</li>*@
 
                     </ul>
                 </li>
-                <li ><a href="@Url.Action("SendMail", "Email")">Utskick</a></li>
+                <li><a href="@Url.Action("SendMail", "Email")">Utskick</a></li>
+                <li  class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Medlemskortet <span class="caret"></span></a>
+                    <ul  class="dropdown-menu">
+                        <li>@Html.ActionLink("Årens färger ", "AdminList", "Admin")</li>
+                        @*<li>@Html.ActionLink("Lägg till administratör ", "MedlemsIndex", "Medlems")</li>*@
+
+                    </ul>
+                </li>
 
             </ul>
         </div>

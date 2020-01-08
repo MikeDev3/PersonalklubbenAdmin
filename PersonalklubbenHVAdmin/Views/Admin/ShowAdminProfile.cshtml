@@ -1,0 +1,118 @@
+﻿@model PersonalklubbenHVAdmin.Models.Admins
+
+@{
+    ViewBag.Title = "Profil";
+}
+
+<h2 style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Profil</h2>
+<h2 style="color: red; ">@Html.ValidationMessage("Felmeddelande")</h2>
+<div>
+</div>
+<div>
+
+
+    @*<button class="blockBtn"> @Html.ActionLink("Blockera", "BlockUser", new { id = Model.ID }, new { @class = "blockbtnColor" })</button>*@
+
+    <hr />
+
+    <dl class="dl-horizontal">
+        @if (Model != null)
+        {
+
+            @*if (Model.user.Picture != null)
+                {
+                    <dt>
+                        Bild
+                    </dt>
+                }
+                else
+                {
+                    <dt style="color:red">Ingen bild finns</dt>
+                    <dd>             </dd>
+                }
+                <dd>
+                    @*<img style="height:200px; width:200px;" src="@Model.user.Picture" />*@
+            @*</dd>*@
+            if (Model.Epostadress != null)
+            {
+                <dt>
+                    E-postadress
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Epostadress)
+                </dd>
+            }
+            else
+            {
+                <dt style="color:red">Epostadress ej registrerad</dt>
+                <dd>              </dd>
+            }
+            if (Model.Förnamn != null)
+            {
+                <dt>
+                    Förnamn
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Förnamn)
+                </dd>
+            }
+            else
+            {
+                <dt style="color:red">Förnamn finns inte</dt>
+                <dd>              </dd>
+            }
+            if (Model.Efternamn != null)
+            {
+                <dt>
+                    Efternamn
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Efternamn)
+                </dd>
+            }
+            else
+            {
+                <dt style="color:red">Efternamn finns inte</dt>
+                <dd>              </dd>
+            }
+            @*if (Model.Institution != null)
+            {
+                <dt>
+                    Institution
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Institution)
+                </dd>
+            }
+            else
+            {
+                <dt style="color:red">Institution ej registrerad</dt>
+                <dd>              </dd>
+            }*@
+            @*if (Model.RegistreringsDatum != null)
+            {
+                <dt>
+                    Gick med
+                </dt>
+                <dd>
+                    @(Model.RegistreringsDatum.ToString("yyyy/MM/dd"))
+                </dd>
+            }
+            else
+            {
+                <dt style="color:red">Registreringsdatum ej funnet</dt>
+                <dd>              </dd>
+            }*@
+           
+        }
+        else
+        {
+
+        }
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Tillbaka till aktiva användare", "MedlemsIndex", "Medlems")
+</p>

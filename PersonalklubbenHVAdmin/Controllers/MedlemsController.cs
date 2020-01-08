@@ -184,8 +184,7 @@ namespace PersonalklubbenHVAdmin.Controllers
         }
 
         public List<Medlem> ShowMembers()
-        {
-           
+        {     
             try
             {
                 using (HttpClient client = new HttpClient())
