@@ -127,6 +127,11 @@ namespace PersonalklubbenHVAdmin.Controllers
             {
                 ViewBag.Username = "Inloggad som: " + sessionObjekt.Förnamn;
 
+                sessionObjekt.Förnamn = string.Concat(sessionObjekt.Förnamn.Where(c => !char.IsWhiteSpace(c)));
+                sessionObjekt.Efternamn = string.Concat(sessionObjekt.Efternamn.Where(c => !char.IsWhiteSpace(c)));
+
+                nyhet.SkapadAv = sessionObjekt.Förnamn + " " + sessionObjekt.Efternamn;
+
             }
             try
                 {

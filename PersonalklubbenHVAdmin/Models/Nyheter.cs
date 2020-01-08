@@ -30,5 +30,8 @@ namespace PersonalklubbenHVAdmin.Models
         public string Link1 { get; set; }
         [StringLength(200)]
         public string Link2 { get; set; }
+        [StringLength(200)]
+        public string SkapadAv { get; set; }
+
     }
 }

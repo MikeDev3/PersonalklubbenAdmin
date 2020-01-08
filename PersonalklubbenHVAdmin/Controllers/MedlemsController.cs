@@ -293,6 +293,7 @@ namespace PersonalklubbenHVAdmin.Controllers
         public async Task<ActionResult> CreateMember (CreateMemberViewmodel nyMedlem)
         {
             sessionObjekt = (Admins)Session["admin"];
+            Medlem newMember = new Medlem();
 
             if (Session["admin"] == null)
             {
@@ -301,6 +302,10 @@ namespace PersonalklubbenHVAdmin.Controllers
             else
             {
                 ViewBag.Username = "Inloggad som: " + sessionObjekt.Förnamn;
+                sessionObjekt.Förnamn = string.Concat(sessionObjekt.Förnamn.Where(c => !char.IsWhiteSpace(c)));
+                sessionObjekt.Efternamn = string.Concat(sessionObjekt.Efternamn.Where(c => !char.IsWhiteSpace(c)));
+
+                newMember.SkapadAv = "Medlemskap lades till av: " + sessionObjekt.Förnamn + " " + sessionObjekt.Efternamn + " den: " + DateTime.Now;
 
             }
 
@@ -314,7 +319,6 @@ namespace PersonalklubbenHVAdmin.Controllers
                 return View(new CreateMemberViewmodel { Institutions = viewmodel.Institutions, years = viewmodel.years });
             }
 
-            Medlem newMember = new Medlem();
             newMember.Förnamn = nyMedlem.medlem.Förnamn;
             newMember.Efternamn = nyMedlem.medlem.Efternamn;
             newMember.Epostadress = nyMedlem.medlem.Epostadress;
@@ -424,6 +428,7 @@ namespace PersonalklubbenHVAdmin.Controllers
         public async Task<ActionResult> UpdateMembership(CreateMemberViewmodel updatedMember)
         {
             sessionObjekt = (Admins)Session["admin"];
+            Medlem newMember = new Medlem();
 
             if (Session["admin"] == null)
             {
@@ -432,6 +437,10 @@ namespace PersonalklubbenHVAdmin.Controllers
             else
             {
                 ViewBag.Username = "Inloggad som: " + sessionObjekt.Förnamn;
+                sessionObjekt.Förnamn = string.Concat(sessionObjekt.Förnamn.Where(c => !char.IsWhiteSpace(c)));
+                sessionObjekt.Efternamn = string.Concat(sessionObjekt.Efternamn.Where(c => !char.IsWhiteSpace(c)));
+
+                newMember.SkapadAv ="Medlemskap uppdataterades av: " + sessionObjekt.Förnamn + " " + sessionObjekt.Efternamn + " den: " + DateTime.Now ;
 
             }
             foreach (var item in updatedMember.Institutions)
@@ -458,7 +467,6 @@ namespace PersonalklubbenHVAdmin.Controllers
                 return View(new CreateMemberViewmodel { Institutions = viewmodel.Institutions, years = viewmodel.years, medlem = medlem });
             }
 
-            Medlem newMember = new Medlem();
             newMember.ID = updatedMember.medlem.ID;
             newMember.Förnamn = updatedMember.medlem.Förnamn;
             newMember.Efternamn = updatedMember.medlem.Efternamn;

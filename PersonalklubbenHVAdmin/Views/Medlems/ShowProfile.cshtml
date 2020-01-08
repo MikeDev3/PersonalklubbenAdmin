@@ -133,6 +133,25 @@
                 <dd>              </dd>
             }
 
+            if (Model.SkapadAv != null)
+            {
+                <br /> <br />
+                <dt>
+                    Logg: 
+                </dt>
+                <dd>
+                    <strong>
+
+                    @Html.DisplayFor(model => model.SkapadAv)
+                    </strong>
+                </dd>
+            }
+            else
+            {
+                <dt style="color:red">Skapad av okänd</dt>
+                <dd>              </dd>
+            }
+
         }
         else
         {
