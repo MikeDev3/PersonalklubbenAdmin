@@ -131,6 +131,10 @@ namespace PersonalklubbenHVAdmin.Controllers
             try
                 {
                      nyhet.PubliceringsDatum = DateTime.Now;
+                if (nyhet.BildURL == null)
+                {
+                    nyhet.BildURL = "https://i.imgur.com/x04QZa8.jpg";
+                }
                     using (HttpClient client = new HttpClient())
                     {
                         client.BaseAddress = new Uri("http://193.10.202.76/");

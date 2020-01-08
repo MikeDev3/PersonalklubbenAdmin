@@ -12,8 +12,8 @@
 <div class="w3-row">
 
     <!-- Blog entries -->
-    <div class="w3-card-4 w3-margin w3-white">
-        <img src="~/Images/woods-walk.jpg" alt="Nature" style="width: 90%; padding: 30px; ">
+    <div class="w3-card-4 w3-margin w3-white">       
+        <img src="@Model.BildURL" alt="Nature" style="width:70%; height: 400px; margin-left: 15%; margin-right: 15%;">
         <div class="w3-container">
             <h3><b>@Html.DisplayFor(m => m.Rubrik)</b></h3>
 
@@ -22,14 +22,14 @@
         </div>
 
         <div class="w3-container">
-           
+
             <p style="font-family:Cambria, Cochin, Georgia, Times, Times New Roman, serif; font-size:17px;">
                 @Html.DisplayFor(m => m.Beskrivning)
             </p>
             <div class="w3-row">
                 <div class="w3-col m8 s12">
                     <p>
-                       
+
                     </p>
                 </div>
                 <div class="w3-col m4 w3-hide-small">

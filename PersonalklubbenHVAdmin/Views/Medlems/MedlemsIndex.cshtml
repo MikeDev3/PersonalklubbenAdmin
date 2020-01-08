@@ -169,8 +169,8 @@
                     shouldSwitch = false;
                     /*Get the two elements you want to compare,
                     one from current row and one from the next:*/
-                    x = rows[i].getElementsByTagName("TD")[3];
-                    y = rows[i + 1].getElementsByTagName("TD")[3];
+                    x = rows[i].getElementsByTagName("TD")[4];
+                    y = rows[i + 1].getElementsByTagName("TD")[4];
                     //check if the two rows should switch place:
                     if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
                         //if so, mark as a switch and break the loop:
@@ -200,8 +200,8 @@
                 for (i = 1; i < (rows.length - 1); i++) {
                     shouldSwitch = false;
 
-                    x = rows[i].getElementsByTagName("TD")[2];
-                    y = rows[i + 1].getElementsByTagName("TD")[2];
+                    x = rows[i].getElementsByTagName("TD")[3];
+                    y = rows[i + 1].getElementsByTagName("TD")[3];
                     if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
                         shouldSwitch = true;
                         break;
@@ -227,8 +227,8 @@
                 for (i = 1; i < (rows.length - 1); i++) {
                     shouldSwitch = false;
 
-                    x = rows[i].getElementsByTagName("TD")[4];
-                    y = rows[i + 1].getElementsByTagName("TD")[4];
+                    x = rows[i].getElementsByTagName("TD")[5];
+                    y = rows[i + 1].getElementsByTagName("TD")[5];
                     if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
                         shouldSwitch = true;
                         break;
