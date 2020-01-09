@@ -21,6 +21,16 @@ namespace PersonalklubbenHVAdmin.Controllers
         // GET: Admin
         public ActionResult AdminList()
         {
+            sessionObjekt = (Admins)Session["admin"];
+
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("LoginIndex", "Login");
+            }
+            else
+            {
+                ViewBag.Username = "Inloggad som: " + sessionObjekt.Förnamn;
+            }
             admins = GetAdmins();
             int amount = admins.Count();
             ViewBag.TotalMembers = amount;
@@ -143,6 +153,16 @@ namespace PersonalklubbenHVAdmin.Controllers
         }
         public ActionResult ShowAdminProfile(int ID)
         {
+            sessionObjekt = (Admins)Session["admin"];
+
+            if (Session["admin"] == null)
+            {
+                return RedirectToAction("LoginIndex", "Login");
+            }
+            else
+            {
+                ViewBag.Username = "Inloggad som: " + sessionObjekt.Förnamn;
+            }
             try
             {
                 admins = GetAdmins();
