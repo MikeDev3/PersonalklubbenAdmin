@@ -22,8 +22,7 @@ namespace PersonalklubbenHVAdmin.Controllers
         }
         [HttpPost]
         public async Task<ActionResult> LoginIndex(Admins admin)
-        {
-           
+        {          
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://193.10.202.76/PhersonalklubbenREST/");

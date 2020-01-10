@@ -23,8 +23,6 @@ namespace PersonalklubbenHVAdmin.Controllers
         List<Medlem> memberList = new List<Medlem>();
         Admins sessionObjekt = new Admins();
 
-
-
         // GET: Medlems
         public ActionResult MedlemsIndex()
         {

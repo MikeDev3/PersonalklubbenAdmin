@@ -31,7 +31,6 @@ namespace PersonalklubbenHVAdmin.Controllers
             else
             {
                 ViewBag.Username = "Inloggad som: " + sessionObjekt.Förnamn;
-
             }
             try
             {
@@ -277,89 +276,7 @@ namespace PersonalklubbenHVAdmin.Controllers
                 return RedirectToAction("NewRegistrations");
             }
 
-            //using (var client = new HttpClient())
-            //{
-            //    client.BaseAddress = new Uri("http://193.10.202.76/");
-            //    var response = client.PutAsJsonAsync("PhersonalklubbenREST/api/Nyheters", updatedNews).Result;
-            //    if (response.IsSuccessStatusCode)
-            //    {
-            //        Console.Write("Success");
-            //        return RedirectToAction("NyhetersIndex");
-            //    }
-            //    else
-            //    {
-            //        Console.Write("Error");
-            //        return RedirectToAction("Index", "Home");
-
-            //    }
-
-
-            //using (HttpClient client = new HttpClient())
-            //{
-            //    try
-            //    {
-            //        //  client.BaseAddress = new Uri("http://localhost:61607");
-            //        string URL = @"http://193.10.202.76/api/Nyheters/" + updatedNews.ID;
-
-            //        var myContent = JsonConvert.SerializeObject(updatedNews);
-            //        var buffer = Encoding.UTF8.GetBytes(myContent);
-            //        var byteContent = new ByteArrayContent(buffer);
-            //        byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            //        var result = client.PutAsync(URL, byteContent).Result;
-
-            //        string data = await result.Content.ReadAsStringAsync();
-
-            //        if (result.IsSuccessStatusCode)
-            //        {
-            //            ModelState.AddModelError("Felmeddelande", "Nyhet ändrad");
-            //            return RedirectToAction("NyheterIndex");
-            //        }
-            //        else
-            //        {
-            //            ModelState.AddModelError("Felmeddelande", "Något gick fel");
-            //            return RedirectToAction("NyheterIndex");
-            //        }
-
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        System.Diagnostics.Debug.WriteLine(ex.ToString());
-            //        return RedirectToAction("NyheterIndex");
-
-            //    }
-            //}
-
-            //try
-            //{
-            //    using (HttpClient client = new HttpClient())
-            //    {
-            //        client.BaseAddress = new Uri("http://193.10.202.76/");
-
-            //        var myContent = JsonConvert.SerializeObject(updatedNews);
-            //        var buffer = Encoding.UTF8.GetBytes(myContent);
-            //        var byteContent = new ByteArrayContent(buffer);
-            //        byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
-            //        var result = client.PutAsync("PhersonalklubbenREST/api/Nyheters", byteContent).Result;
-            //        string data = await result.Content.ReadAsStringAsync();
-            //        if (result.IsSuccessStatusCode)
-            //        {
-            //            ModelState.AddModelError("Felmeddelande", "Nyhet ändrad");
-            //            return RedirectToAction("NyheterIndex");
-            //        }
-            //        else
-            //        {
-            //            ModelState.AddModelError("Felmeddelande", "Något gick fel");
-            //            return RedirectToAction("NyheterIndex");
-            //        }
-            //    }
-            //}
-            //catch (Exception)
-            //{
-
-            //    ModelState.AddModelError("Felmeddelande", "Denna användare kan inte hittas.");
-            //    return RedirectToAction("NyheterIndex");
-            //}
+         
 
         }
 

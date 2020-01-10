@@ -12,7 +12,7 @@ namespace PersonalklubbenHVAdmin.Controllers
         Admins sessionObjekt = new Admins();
 
         // GET: Email
-        public ActionResult SendMail()
+        public ActionResult SendMail() // Not implemented yet
         {
             sessionObjekt = (Admins)Session["admin"];
 
