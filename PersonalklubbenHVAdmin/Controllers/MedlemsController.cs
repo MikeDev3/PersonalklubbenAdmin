@@ -366,8 +366,7 @@ namespace PersonalklubbenHVAdmin.Controllers
 
                         try
                         {
-                            ModelState.AddModelError("Felmeddelande", "Allt fylldes inte i korrekt");
-
+                            ModelState.AddModelError("Felmeddelande", data);
                             return View(new CreateMemberViewmodel { Institutions = viewmodel.Institutions, years = viewmodel.years });
 
                         }

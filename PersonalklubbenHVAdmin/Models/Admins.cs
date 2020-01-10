@@ -17,8 +17,10 @@ namespace PersonalklubbenHVAdmin.Models
         public string Efternamn { get; set; }
 
         [Required]
-        [EmailAddress]
-        [StringLength(60)]
+        [StringLength(60, MinimumLength = 10)]
+        //[EmailAddress(ErrorMessage ="Ogiltig e-postadress")]
+        [RegularExpression(@"^[a-zA-Z0-9._%+-]+([-.]\w+)*@hv.se$",
+                                                ErrorMessage = "E-postadressen har fel format")]
         public string Epostadress { get; set; }
 
         [Required]
