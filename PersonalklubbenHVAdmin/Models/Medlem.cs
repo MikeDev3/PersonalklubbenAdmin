@@ -32,11 +32,11 @@ namespace PersonalklubbenHVAdmin.Models
         [StringLength(50)]
         public string Institution { get; set; }
 
-        //[Required]
-        //[StringLength(40, MinimumLength =10)]
-        ////[EmailAddress(ErrorMessage ="Ogiltig e-postadress")]
-        //[RegularExpression(@"^[a-zA-Z0-9._%+-]+([-.]\w+)*@hv.se$",
-        //                                        ErrorMessage = "E-postadressen har fel format")]
+        [Required]
+        [StringLength(40, MinimumLength = 10)]
+        //[EmailAddress(ErrorMessage ="Ogiltig e-postadress")]
+        [RegularExpression(@"^[a-zA-Z0-9._%+-]+([-.]\w+)*@hv.se$",
+                                                ErrorMessage = "E-postadressen har fel format")]
         public string Epostadress { get; set; }
 
         [Column(TypeName = "date")]

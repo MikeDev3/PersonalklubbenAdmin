@@ -10,11 +10,11 @@ namespace PersonalklubbenHVAdmin.Models
     {
         public int ID { get; set; }
 
-        //[Required]
-        //[StringLength(60, MinimumLength = 10)]
-        ////[EmailAddress(ErrorMessage ="Ogiltig e-postadress")]
-        //[RegularExpression(@"^[a-zA-Z0-9._%+-]+([-.]\w+)*@hv.se$",
-        //                                        ErrorMessage = "E-postadressen har fel format")]
+        [Required]
+        [StringLength(60, MinimumLength = 10)]
+        //[EmailAddress(ErrorMessage ="Ogiltig e-postadress")]
+        [RegularExpression(@"^[a-zA-Z0-9._%+-]+([-.]\w+)*@hv.se$",
+                                                ErrorMessage = "E-postadressen har fel format")]
         public string Epost { get; set; }
 
         [Required]
